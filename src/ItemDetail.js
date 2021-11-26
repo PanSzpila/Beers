@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./App.css";
 
-function ItemDetail({ match }) {
+function ItemDetail() {
+  console.log(useParams());
+  const { id } = useParams();
   useEffect(() => {
-    fetchItem();
-    console.log(match);
+    fetchItem(id);
+    console.log(`useParams.id === ${id}`);
   }, []);
 
   const [item, setItem] = useState([]);
 
-  const fetchItem = async () => {
-    const fetchItem = await fetch(`https://api.punkapi.com/v2/beers/1`);
+  const fetchItem = async (id) => {
+    const fetchItem = await fetch(`https://api.punkapi.com/v2/beers/${id}`);
     const item = await fetchItem.json();
 
     console.log(item);

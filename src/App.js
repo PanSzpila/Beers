@@ -1,4 +1,4 @@
-//https://www.youtube.com/watch?v=Law7wfdg_ls   19' "
+//https://www.youtube.com/watch?v=Law7wfdg_ls   30' "
 
 import "./App.css";
 import Nav from "./Nav";
