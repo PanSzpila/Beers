@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import { Link } from "react-router-dom";
 
-function Shop() {
+function Shop(props) {
   useEffect(() => {
     fetchItems();
   }, []);
@@ -21,11 +21,18 @@ function Shop() {
     <div>
       {items.map((item) => (
         <h4 key={item.id}>
-          <Link to={`/shop/${item.id}`}>{item.name}</Link>
+          <Link
+            to={`/shop/${item.name.replace(/ /g, "-")}`}
+            onClick={() => props.GetId(item.id)}
+          >
+            {item.name}
+          </Link>
         </h4>
       ))}
     </div>
   );
 }
+
+//onclick item name, line 24 -> get id?
 
 export default Shop;
