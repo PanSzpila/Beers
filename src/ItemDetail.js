@@ -1,14 +1,9 @@
 import { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
 import "./App.css";
 
 function ItemDetail(props) {
-  // console.log(props);
-  // const { id: name } = useParams();
-
   useEffect(() => {
     fetchItem(props.itemId);
-    //  console.log(`useParams.name === ${name}`);
   }, []);
 
   const [item, setItem] = useState({});
