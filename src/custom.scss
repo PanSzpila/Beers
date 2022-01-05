@@ -1,0 +1,16 @@
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/bootstrap"; //to działa
+
+//bug: nic poniżej nie działa. Nie wpływa na zmianę wyglądu projektu
+
+$body-bg: rgb(253, 47, 47);
+$body-color: rgb(17, 17, 17);
+
+.navbar-nav {
+  list-style: none;
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+  color: red;
+}
