@@ -1,15 +1,17 @@
 //https://www.youtube.com/watch?v=Law7wfdg_ls   30' "
 
 import { useState } from "react";
-import "./App.css";
+import "./custom.scss";
 import Nav from "./Nav";
 import About from "./About";
 import Shop from "./Shop";
 import ItemDetail from "./ItemDetail";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import * as bootstrap from "bootstrap";
 
 function App() {
   const [itemId, setItemId] = useState([]);
+  const apiUrl = "https://api.punkapi.com/v2/beers";
 
   return (
     <Router>
@@ -21,9 +23,14 @@ function App() {
           <Route
             path="/shop"
             exact
-            element={<Shop GetId={(itemId) => setItemId(itemId)} />}
+            element={
+              <Shop apiUrl={apiUrl} GetId={(itemId) => setItemId(itemId)} />
+            }
           />
-          <Route path="/shop/:name" element={<ItemDetail itemId={itemId} />} />
+          <Route
+            path="/shop/:name"
+            element={<ItemDetail apiUrl={apiUrl} itemId={itemId} />}
+          />
         </Routes>
       </div>
     </Router>
