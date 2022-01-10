@@ -27,7 +27,6 @@ function Shop(props) {
   const [brewed_afterDate, SetBrewed_afterDate] = useState(); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
 
   const filters0 = {
-    // I hadn't better idea to easily reset state of filters (above)
     page: 1,
     per_page: 25,
     abv_gt: undefined,
@@ -37,10 +36,11 @@ function Shop(props) {
     brewed_after: undefined,
     malt: undefined,
     food: undefined,
-  };
+  }; // I didn't have better idea to easily reset state of filters (above). I allso failded to deep copy of filters object, using spread operator or JSON.parse(JSON.stingify(filters)), so everytime when filters changes, filters0 changed as well (probably due to store them by reference). So i have all values rewriten to keep it separated. Teach me a better way.
 
   useEffect(() => {
     fetchItems(urlWithFilters());
+    console.log(filters0);
   }, [filters]);
 
   const handleFilters = (e) => {
@@ -98,7 +98,7 @@ function Shop(props) {
     const data = await fetch(url);
     const fetchedItems = await data.json();
     setItems(fetchedItems);
-    console.log(items); //bug: Wyświetla dla poprzedniego stanu. nieaktualne informacje. Chciałbym zrobić że jeśli itemy są nie sfeczowane to niech wyświetla warning aby zmienić kryteria wyszukiwania, ale nie wiem gdzie mam to umiścić by stan był aktualny a nie poprzedni.
+    // console.log(items); //bug: Wyświetla dla poprzedniego stanu. nieaktualne informacje. Chciałbym zrobić że jeśli itemy są nie sfeczowane to niech wyświetla warning aby zmienić kryteria wyszukiwania, ale nie wiem gdzie mam to umiścić by stan był aktualny a nie poprzedni.
   };
 
   const urlWithFilters = () => {
@@ -242,7 +242,9 @@ function Shop(props) {
               type="reset"
               className="btn btn-primary"
               value="reset filters"
-              onClick={() => setFilters(filters0)}
+              onClick={() => {
+                setFilters({ ...filters0 });
+              }}
             ></input>
           </div>
         </form>
