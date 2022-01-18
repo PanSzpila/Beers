@@ -7,7 +7,6 @@ import About from "./About";
 import Shop from "./Shop";
 import ItemDetail from "./ItemDetail";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import * as bootstrap from "bootstrap";
 
 function App() {
   const [itemId, setItemId] = useState([]);

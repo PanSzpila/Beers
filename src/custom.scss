@@ -1,8 +1,3 @@
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/bootstrap"; //to działa
-
-//bug: nic poniżej nie działa. Nie wpływa na zmianę wyglądu projektu
-
 $body-bg: rgb(253, 47, 47);
 $body-color: rgb(17, 17, 17);
 
@@ -11,6 +6,17 @@ $body-color: rgb(17, 17, 17);
 }
 
 .navbar-collapse {
-  justify-content: flex-end;
-  color: red;
+  a {
+    text-decoration: none;
+  }
+  li.nav-item.nav-link.active {
+    color: #656565;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+.card-img-top {
+  width: 25 !important; //_accordion.scss:102 nadpisuje mi tę wartość na 100% co rozciąga obrazki na kartach. Dlaczego custom jest mniej ważniejszy niż wewnętrzne pliki bootstrapa??
 }
