@@ -1,22 +1,51 @@
 $body-bg: rgb(253, 47, 47);
 $body-color: rgb(17, 17, 17);
+$link-decoration: none;
+
+a {
+  text-decoration: none !important;
+}
 
 .navbar-nav {
   list-style: none;
 }
 
-.navbar-collapse {
+.navbar {
   a {
     text-decoration: none;
   }
+}
+
+.navbar-collapse {
   li.nav-item.nav-link.active {
-    color: #656565;
+    color: #cccccc;
 
     &:hover {
       color: #fff;
     }
   }
 }
+
 .card-img-top {
-  width: 25 !important; //_accordion.scss:102 nadpisuje mi tę wartość na 100% co rozciąga obrazki na kartach. Dlaczego custom jest mniej ważniejszy niż wewnętrzne pliki bootstrapa??
+  width: 100%;
+  height: 15vw;
+  object-fit: contain;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  min-height: 2.5em;
+}
+
+/* .card-text {
+  min-height: 5em;
+} */
+
+.crop-text-3 {
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }

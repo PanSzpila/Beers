@@ -12,9 +12,7 @@ function Nav() {
     <nav className="navbar navbar-expand-sm navbar navbar-dark bg-dark">
       <div className="container-fluid">
         <Link to="/">
-          <h5 className="navbar-brand" href="#">
-            PiFko.pl
-          </h5>
+          <h5 className="navbar-brand">PiFko.pl</h5>
         </Link>
         <button
           className="navbar-toggler"
@@ -27,7 +25,10 @@ function Nav() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse justify-content-end text-end" id="navbarSupportedContent">
+        <div
+          className="collapse navbar-collapse justify-content-end text-end"
+          id="navbarSupportedContent"
+        >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <Link to="/">
               <li className="nav-item nav-link active">Home</li>
