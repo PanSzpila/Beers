@@ -1,7 +1,6 @@
 //https://www.youtube.com/watch?v=Law7wfdg_ls   30' "
 
 import { useState } from "react";
-import "./custom.scss";
 import Nav from "./Nav";
 import About from "./About";
 import Shop from "./Shop";

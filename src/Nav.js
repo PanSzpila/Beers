@@ -1,6 +1,4 @@
 import React from "react";
-import * as bootstrap from "bootstrap";
-import "./custom.scss";
 import { Link } from "react-router-dom";
 
 function Nav() {
@@ -11,8 +9,8 @@ function Nav() {
   return (
     <nav className="navbar navbar-expand-sm navbar navbar-dark bg-dark">
       <div className="container-fluid">
-        <Link to="/">
-          <h5 className="navbar-brand">PiFko.pl</h5>
+        <Link className="navbar-brand" to="/">
+          PiFko.pl
         </Link>
         <button
           className="navbar-toggler"
@@ -25,21 +23,25 @@ function Nav() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div
-          className="collapse navbar-collapse justify-content-end text-end"
-          id="navbarSupportedContent"
-        >
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <Link to="/">
-              <li className="nav-item nav-link active">Home</li>
-            </Link>
-            <Link to="/about">
-              <li className="nav-item nav-link active">About</li>
-            </Link>
-            <Link to="/shop">
-              <li className="nav-item nav-link active">Shop</li>
-            </Link>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/about">
+                About
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/shop">
+                Shop
+              </Link>
+            </li>
           </ul>
+          <ul id="test">test</ul>
         </div>
       </div>
     </nav>

@@ -1,5 +1,3 @@
-import "./custom.scss";
-
 function About() {
   return (
     <div>

@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import "./custom.scss";
 import { Link } from "react-router-dom";
-import * as bootstrap from "bootstrap";
-
 import Pagination from "./Pagination";
 
 const defaultFilters = {
@@ -20,7 +17,7 @@ const defaultFilters = {
 function Shop(props) {
   const maxAbv = 15; //here You can set maximal alcohol percent ratio available in items search filters and range input
   const maxPages = 13; //here You can set maximal number of pages in items list
-  const [showCards, setShowCards] = useState(false); // options of display items: true - displays cards, false - displays table
+  const [showCards, setShowCards] = useState(true); // options of display items: true - displays cards, false - displays table
   const [items, setItems] = useState([]);
   const [filters, setFilters] = useState(defaultFilters);
   const [abv_ltRange, setAbv_ltRange] = useState(maxAbv); //similar to filters.abv_lt, but this is changing onChange of range input instead of mouseDown.
@@ -113,9 +110,8 @@ function Shop(props) {
     }));
 
   return (
-    <div className="container-lg">
+    <div className="container-lg bg-dark px-5 py-5">
       <div>
-        {" "}
         {/* Form - beer search */}
         <form className="row">
           <div className="form-floating mb-3 col-md-10 col-xl-4">
@@ -152,7 +148,7 @@ function Shop(props) {
               alcohol min % (ABV): {abv_gtRange}
             </label>
             <input
-              className="form-range"
+              className="form-range bg-dark"
               onInput={(e) => setAbv_gtRange(e.target.value)}
               onMouseUp={handleFilters}
               type="range"
@@ -165,12 +161,12 @@ function Shop(props) {
             ></input>
           </div>
 
-          <div className="mb-3  col-md-6 col-xl-3">
+          <div className="mb-3  col-md-6 col-xl-3 ">
             <label htmlFor="abv_lt" className="form-label">
               alcohol max % (ABV): {abv_ltRange}
             </label>
             <input
-              className="form-range"
+              className="form-range bg-dark"
               onInput={(e) => setAbv_ltRange(e.target.value)}
               onMouseUp={handleFilters}
               type="range"
@@ -193,7 +189,7 @@ function Shop(props) {
               required
               pattern="[0-9]{2}-[0-9]{4}"
             />
-            <label htmlFor="brewed_after">brewed_after:</label>
+            <label htmlFor="brewed_after">brewed after:</label>
           </div>
 
           <div className="form-floating mb-3 col-md-2">
@@ -204,7 +200,7 @@ function Shop(props) {
               id="brewed_before"
               name="brewed_before"
             />
-            <label htmlFor="brewed_before">brewed_before:</label>
+            <label htmlFor="brewed_before">brewed before:</label>
           </div>
 
           <div className="form-floating mb-3 col-md-4">
@@ -220,7 +216,7 @@ function Shop(props) {
             <label htmlFor="malt">malt:</label>
           </div>
 
-          <div className="form-floating mb-3 col-md-4">
+          <div className="form-floating mb-4 col-md-4">
             <input
               type="search"
               className="form-control form-floating"
@@ -234,7 +230,7 @@ function Shop(props) {
             />
             <label htmlFor="food">food:</label>
           </div>
-          <div className="mb-3">
+          <div className="mb-4">
             <input
               type="reset"
               className="btn btn-primary"
@@ -275,7 +271,7 @@ function Shop(props) {
             >
               <path
                 d="M10 13l1 1v7l-1 1H3l-1-1v-7l1-1h7zm7.5 0c2.481 0 4.5 2.018 4.5 4.5S19.981 22 17.5 22a4.505 4.505 0 01-4.5-4.5c0-2.482 2.019-4.5 4.5-4.5zM9 15H4v5h5v-5zm8.5 0a2.503 2.503 0 00-2.5 2.5c0 1.378 1.122 2.5 2.5 2.5s2.5-1.122 2.5-2.5-1.122-2.5-2.5-2.5zM10 2l1 1v7l-1 1H3l-1-1V3l1-1h7zm11 0l1 1v7l-1 1h-7l-1-1V3l1-1h7zM9 4H4v5h5V4zm11 0h-5v5h5V4z"
-                fill={showCards ? "grey" : "currentColor"}
+                fill={showCards ? "rgb(187, 169, 70)" : "rgb(218, 218, 218)"}
                 fillRule="evenodd"
               ></path>
             </svg>
@@ -288,12 +284,11 @@ function Shop(props) {
               className="css-73cnv0"
               onClick={() => {
                 setShowCards(false);
-                console.log(showCards);
               }}
             >
               <path
                 d="M3.768 15.99l.59 1.02-.59 1.022H2.59L2 17.01l.59-1.021h1.178zm17.41 0l.217.217.567.566.217.217-1 1h-14l-1-1 1-1h14zm-17.41-4.948l.589 1.02-.589 1.022H2.589L2 12.063l.589-1.021h1.179zm17.41 0l1 1-1 1h-14l-1-1 1-1h14zM3.769 6l.589 1.02-.589 1.022h-1.18L2 7.02 2.589 6h1.179zm17.41 0l1 1-1 1h-14l-1-1 1-1h14z"
-                fill={showCards ? "currentColor" : "grey"}
+                fill={showCards ? "rgb(218, 218, 218)" : "rgb(187, 169, 70)"}
                 fillRule="evenodd"
               ></path>
             </svg>
@@ -360,7 +355,7 @@ function Shop(props) {
                         <h5 className="card-title">
                           {item.id}. {item.name}
                         </h5>
-                        <p className="card-text crop-text-3">
+                        <p className="card-text crop-text-4">
                           {item.description}
                         </p>
                       </div>

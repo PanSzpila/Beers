@@ -1,9 +1,38 @@
-$body-bg: rgb(253, 47, 47);
-$body-color: rgb(17, 17, 17);
-$link-decoration: none;
+@use "~bootstrap/scss/bootstrap" as *;
 
-a {
-  text-decoration: none !important;
+//my variables:
+$lightBeer: rgb(209, 179, 113);
+$beer: rgb(187, 169, 70);
+$lightGrey: rgb(218, 218, 218);
+$grey: #666;
+
+//Bootstrap variables ovverride:
+$primary: $beer;
+$blue: $beer;
+
+body {
+  background-color: $grey;
+}
+
+body a {
+  color: $beer;
+  text-decoration: none;
+}
+body a:hover,
+.card:hover {
+  color: $lightBeer;
+}
+
+:focus:not(nav div a:focus) {
+  background-color: $beer;
+  border-color: $lightBeer;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $lightBeer;
+  outline: none;
+}
+
+.bg-dark h1,
+.bg-dark h3 {
+  color: $grey;
 }
 
 .navbar-nav {
@@ -16,36 +45,116 @@ a {
   }
 }
 
-.navbar-collapse {
-  li.nav-item.nav-link.active {
-    color: #cccccc;
+div .navbar-collapse {
+  flex-grow: 0;
+}
 
-    &:hover {
-      color: #fff;
-    }
-  }
+.navbar-dark .navbar-brand {
+  color: $beer;
+}
+
+body .navbar-dark .navbar-nav .nav-link.active,
+body .navbar-dark .navbar-nav .show > .nav-link {
+  color: #cccccc;
+}
+
+body .navbar-dark .navbar-nav .nav-link.active:hover,
+body .navbar-dark .navbar-nav .show > .nav-link:hover,
+.navbar-dark .navbar-brand:hover {
+  color: $lightBeer;
+}
+
+.row input,
+.row textarea,
+.row select,
+.form-control label,
+.pagination .page-item,
+.card {
+  background-color: $grey;
+  color: $lightGrey;
+  //  border-color: $beer;
+}
+.form-label {
+  color: $lightGrey;
+}
+.form-control {
+  background-color: $grey;
+}
+.form-floating > label {
+  color: $lightGrey;
+}
+.row .form-floating > .form-control:focus ~ label,
+.row .form-floating > .form-control:not(:placeholder-shown) ~ label,
+.row .form-floating > .form-select ~ label {
+  opacity: 1;
+}
+
+.btn-primary {
+  border-color: $beer;
+}
+.btn-primary:hover {
+  background-color: $beer;
+  border-color: $beer;
+}
+
+.btn-check:checked + .btn-primary,
+.btn-check:active + .btn-primary,
+.btn-primary:active,
+.btn-primary.active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: $beer;
+  border-color: $lightBeer;
+}
+
+.pagination .page-link,
+.page .pagination .disabled {
+  color: $lightGrey;
+  background-color: $grey;
+}
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: $beer;
+  border-color: $beer;
+}
+.page-item.disabled .page-link {
+  background-color: $grey;
+}
+
+.card {
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  padding: 1rem;
+}
+.card-body {
+  padding: 0;
 }
 
 .card-img-top {
-  width: 100%;
+  width: 100px;
   height: 15vw;
   object-fit: contain;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-left: 0.6em;
 }
 
 .card-title {
   min-height: 2.5em;
 }
 
-/* .card-text {
-  min-height: 5em;
-} */
+@for $i from 1 through 10 {
+  .crop-text-#{$i} {
+    -webkit-line-clamp: $i;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+}
 
-.crop-text-3 {
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+#test {
+  width: 20px;
+  height: 20px;
+  background-color: $dark;
+  color: $light;
 }

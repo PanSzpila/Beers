@@ -1,7 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./custom.scss";
-import * as bootstrap from "bootstrap";
 
 const Pagination = (props) => {
   return (
