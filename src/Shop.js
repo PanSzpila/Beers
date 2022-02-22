@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
+import MultiRange from "./MultiRange";
 
 const defaultFilters = {
   page: 1,
@@ -22,6 +23,7 @@ function Shop(props) {
   const [filters, setFilters] = useState(defaultFilters);
   const [abv_ltRange, setAbv_ltRange] = useState(maxAbv); //similar to filters.abv_lt, but this is changing onChange of range input instead of mouseDown.
   const [abv_gtRange, setAbv_gtRange] = useState(0); //similar to filters.abv_gt, but this is changing onChange of range input instead of mouseDown.
+  const [resetAbvRange, SetResetAbvRange] = useState(false); //reset multi range slider to default knobs position.
   const [brewed_beforeDate, SetBrewed_beforeDate] = useState(new Date()); //similar to filters.brewed_before, but here is date format, and filters.brewed_before is in api-friendly string
   const [brewed_afterDate, SetBrewed_afterDate] = useState(); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
   const [wrongSearchDescription, setWrongSearchDescription] = useState(
@@ -178,6 +180,27 @@ function Shop(props) {
               step="0.5"
             ></input>
           </div>
+          <div className="form-floating mb-3 col-md-6">
+            <MultiRange
+              min={0}
+              max={maxAbv}
+              minValue={0}
+              maxValue={maxAbv}
+              step={1}
+              ruler={false}
+              label={false}
+              setAbv={(minValue, maxValue) => {
+                setFilters((prevState) => ({
+                  ...prevState,
+                  abv_gt: minValue,
+                  abv_lt: maxValue,
+                  page: 1,
+                }));
+              }}
+              reset={resetAbvRange}
+            />
+            {/*  https://github.com/developergovindgupta/multi-range-slider-react */}
+          </div>
 
           <div className="form-floating mb-3 col-md-2">
             <input
@@ -239,13 +262,16 @@ function Shop(props) {
                 setFilters({ ...defaultFilters });
                 setAbv_gtRange(0);
                 setAbv_ltRange(maxAbv);
+                SetResetAbvRange(true);
               }}
             ></input>
           </div>
         </form>
       </div>
 
-      <div style={items.length ? {} : { display: "none" }}>
+      <div
+        style={filters.page === 1 && !items.length ? { display: "none" } : {}}
+      >
         <div className="d-flex justify-content-between">
           {/* Pagination and buttons - toggle View */}
           <div className="col-auto">
@@ -372,7 +398,9 @@ function Shop(props) {
           setPage={(newPage) => setPage(newPage)}
         />
       </div>
-      <div style={items.length ? { display: "none" } : {}}>
+      <div
+        style={!items.length && filters.page === 1 ? {} : { display: "none" }}
+      >
         {/* message when error */}
         <h3>No items to display. Check your filters above.</h3>
       </div>
