@@ -41,7 +41,6 @@ function Nav() {
               </Link>
             </li>
           </ul>
-          <ul id="test">test</ul>
         </div>
       </div>
     </nav>

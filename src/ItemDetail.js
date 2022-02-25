@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
 function ItemDetail(props) {
+  const [item, setItem] = useState();
+
   useEffect(() => {
     const fetchItem = async (id) => {
       let fetchedItem = await fetch(`${props.apiUrl}/${id}`).then((response) =>
@@ -13,14 +15,15 @@ function ItemDetail(props) {
     fetchItem(props.itemId);
   }, []);
 
-  const [item, setItem] = useState();
-
   return (
     <div>
       <h1>
         Item {props.itemId}: {item && item.name}
       </h1>
-      <div></div>
+      <div>
+        <img src={item && item.image_url} alt="beer image" />
+      </div>
+      <p>{item && item.description}</p>
     </div>
   );
 }

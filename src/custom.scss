@@ -124,7 +124,7 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
 
 .card {
   flex-direction: row-reverse;
-  align-items: flex-end;
+  align-items: flex-start;
   padding: 1rem;
 }
 .card-body {
@@ -173,11 +173,4 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
   .thumb .min-value {
     background-color: $beer;
   }
-}
-
-#test {
-  width: 20px;
-  height: 20px;
-  background-color: $dark;
-  color: $light;
 }

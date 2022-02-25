@@ -21,11 +21,9 @@ function Shop(props) {
   const [showCards, setShowCards] = useState(true); // options of display items: true - displays cards, false - displays table
   const [items, setItems] = useState([]);
   const [filters, setFilters] = useState(defaultFilters);
-  const [abv_ltRange, setAbv_ltRange] = useState(maxAbv); //similar to filters.abv_lt, but this is changing onChange of range input instead of mouseDown.
-  const [abv_gtRange, setAbv_gtRange] = useState(0); //similar to filters.abv_gt, but this is changing onChange of range input instead of mouseDown.
-  const [resetAbvRange, SetResetAbvRange] = useState(false); //reset multi range slider to default knobs position.
-  const [brewed_beforeDate, SetBrewed_beforeDate] = useState(new Date()); //similar to filters.brewed_before, but here is date format, and filters.brewed_before is in api-friendly string
-  const [brewed_afterDate, SetBrewed_afterDate] = useState(); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
+  const [resetAbvRange, setResetAbvRange] = useState(false); //reset multi range slider to default knobs position.
+  const [brewed_beforeDate, setBrewed_beforeDate] = useState(new Date()); //similar to filters.brewed_before, but here is date format, and filters.brewed_before is in api-friendly string
+  const [brewed_afterDate, setBrewed_afterDate] = useState(); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
   const [wrongSearchDescription, setWrongSearchDescription] = useState(
     "In your search, minimal percentage of acohol must be lower than maximal."
   ); //description in modal if you set wrong search parameters
@@ -61,8 +59,8 @@ function Shop(props) {
     if (name === "brewed_before" || name === "brewed_after") {
       const d = new Date(value);
       name === "brewed_before"
-        ? SetBrewed_beforeDate(d)
-        : SetBrewed_afterDate(d);
+        ? setBrewed_beforeDate(d)
+        : setBrewed_afterDate(d);
       value = ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getFullYear();
       if (
         brewed_beforeDate &&
@@ -83,15 +81,6 @@ function Shop(props) {
       [name]: value,
       page: 1,
     }));
-    if (filters.abv_gt >= filters.abv_lt) {
-      let WrongSearch = new bootstrap.Modal(
-        document.getElementById("WrongSearch")
-      );
-      setWrongSearchDescription(
-        "In your search, minimal percentage of acohol must be lower than maximal."
-      );
-      WrongSearch.show();
-    } //FIXME: działa czasem źle, pewnie chodzi oto że funkcja się wywoła przed updatem stanu (mimo że update jest kilka linijek wyżej). Sprawdziłem jeszcze raz i nie działa. Może masz szybszego kompa i asynchroniczne rzeczy dzieją się w innym czasie, ale przecież chyba jak na niektórych kompach nie działa tzn że jest bug i trzeba go naprawić aby wszędzie działało. Czy można to zrobić jakoś obietnicą i .than gdy się stan zupdatuje?
   };
 
   const changePage = (direction) => {
@@ -116,7 +105,7 @@ function Shop(props) {
       <div>
         {/* Form - beer search */}
         <form className="row">
-          <div className="form-floating mb-3 col-md-10 col-xl-4">
+          <div className="form-floating mb-3 col-sm-9 col-xl-6">
             <input
               type="search"
               className="form-control form-floating"
@@ -129,7 +118,7 @@ function Shop(props) {
               Beer name:
             </label>
           </div>
-          <div className="form-floating mb-3 col-md-2 col-xl-2">
+          <div className="form-floating mb-3 col-sm-3 col-xl-2">
             <select
               className="form-select form-floating"
               value={filters.per_page}
@@ -144,65 +133,38 @@ function Shop(props) {
             </select>
             <label htmlFor="per_page">items on page:</label>
           </div>
-
-          <div className="mb-3 col-md-6 col-xl-3">
-            <label htmlFor="abv_gt" className="form-label">
-              alcohol min % (ABV): {abv_gtRange}
-            </label>
-            <input
-              className="form-range bg-dark"
-              onInput={(e) => setAbv_gtRange(e.target.value)}
-              onMouseUp={handleFilters}
-              type="range"
-              id="abv_gt"
-              name="abv_gt"
-              min="0"
-              max={maxAbv}
-              defaultValue="0"
-              step="0.5"
-            ></input>
+          <div className="form-floating mb-3 col-md-6 col-xl-4">
+            <div className="App">
+              <label
+                htmlFor="MultiRange"
+                className="form-label"
+                id="multiRangeSliderLabel"
+              >
+                alcohol (ABV) - between {filters.abv_gt}%, and {filters.abv_lt}%
+              </label>
+              <MultiRange
+                min={0}
+                max={maxAbv}
+                minValue={0}
+                maxValue={maxAbv}
+                step={1}
+                ruler={false}
+                label={false}
+                setAbv={(minValue, maxValue) => {
+                  setFilters((prevState) => ({
+                    ...prevState,
+                    abv_gt: minValue,
+                    abv_lt: maxValue,
+                    page: 1,
+                  }));
+                }}
+                reset={resetAbvRange}
+                reseted={() => setResetAbvRange(false)}
+              />
+            </div>
           </div>
 
-          <div className="mb-3  col-md-6 col-xl-3 ">
-            <label htmlFor="abv_lt" className="form-label">
-              alcohol max % (ABV): {abv_ltRange}
-            </label>
-            <input
-              className="form-range bg-dark"
-              onInput={(e) => setAbv_ltRange(e.target.value)}
-              onMouseUp={handleFilters}
-              type="range"
-              id="abv_lt"
-              name="abv_lt"
-              min="0"
-              max={maxAbv}
-              defaultValue={maxAbv}
-              step="0.5"
-            ></input>
-          </div>
-          <div className="form-floating mb-3 col-md-6">
-            <MultiRange
-              min={0}
-              max={maxAbv}
-              minValue={0}
-              maxValue={maxAbv}
-              step={1}
-              ruler={false}
-              label={false}
-              setAbv={(minValue, maxValue) => {
-                setFilters((prevState) => ({
-                  ...prevState,
-                  abv_gt: minValue,
-                  abv_lt: maxValue,
-                  page: 1,
-                }));
-              }}
-              reset={resetAbvRange}
-            />
-            {/*  https://github.com/developergovindgupta/multi-range-slider-react */}
-          </div>
-
-          <div className="form-floating mb-3 col-md-2">
+          <div className="form-floating mb-3 col-sm-6 col-md-3 col-xl-2">
             <input
               type="month"
               onChange={handleFilters}
@@ -215,9 +177,9 @@ function Shop(props) {
             <label htmlFor="brewed_after">brewed after:</label>
           </div>
 
-          <div className="form-floating mb-3 col-md-2">
+          <div className="form-floating mb-3 col-sm-6 col-md-3 col-xl-2">
             <input
-              type="month"
+              type="month" /*TODO: month */
               className="form-control form-floating"
               onChange={handleFilters}
               id="brewed_before"
@@ -226,7 +188,7 @@ function Shop(props) {
             <label htmlFor="brewed_before">brewed before:</label>
           </div>
 
-          <div className="form-floating mb-3 col-md-4">
+          <div className="form-floating mb-3 col-sm-6 col-xl-4">
             <input
               type="search"
               className="form-control form-floating"
@@ -239,7 +201,7 @@ function Shop(props) {
             <label htmlFor="malt">malt:</label>
           </div>
 
-          <div className="form-floating mb-4 col-md-4">
+          <div className="form-floating mb-4 col-sm-6 col-xl-4">
             <input
               type="search"
               className="form-control form-floating"
@@ -260,9 +222,7 @@ function Shop(props) {
               value="reset filters"
               onClick={() => {
                 setFilters({ ...defaultFilters });
-                setAbv_gtRange(0);
-                setAbv_ltRange(maxAbv);
-                SetResetAbvRange(true);
+                setResetAbvRange(true);
               }}
             ></input>
           </div>
