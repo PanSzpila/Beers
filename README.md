@@ -12,3 +12,4 @@ Based on:
     - variables
     - functions
 - REST API integration
+    - filtering items, showing details
