@@ -2,11 +2,13 @@
 
 //my custom variables:
 $lightBeer: rgb(209, 179, 113);
-$beer: rgb(187, 169, 70);
+$beer: rgb(220, 191, 133);
+$darkBeer: rgb(68, 56, 53);
 $lightGrey: rgb(218, 218, 218);
 $grey: rgb(179, 179, 179);
 
 //Bootstrap variables ovverride:
+$dark: rgb(40, 37, 32);
 $primary: $beer;
 $blue: $beer;
 
@@ -23,10 +25,14 @@ body a:hover,
   color: $lightBeer;
 }
 
+.bg-dark {
+  background-color: $dark !important;
+}
+
 :focus:not(nav div a:focus) {
-  background-color: $beer;
-  border-color: $lightBeer;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $lightBeer;
+  background-color: $darkBeer;
+  border-color: $lightGrey;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px $darkBeer;
   outline: none;
 }
 
@@ -64,29 +70,45 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
   color: $lightBeer;
 }
 
+.form-floating > label,
+.form-label {
+  margin-left: 0.5rem;
+}
+
+.form-control,
+.form-select {
+  border-radius: 1rem;
+  color: $lightGrey;
+}
 .row input,
 .row textarea,
 .row select,
 .form-control label,
 .pagination .page-item,
 .card {
-  background-color: $grey;
-  color: $dark;
+  background-color: $dark;
+  //  color: $dark;
   //  border-color: $beer;
+}
+.form-floating input {
+  color: $lightGrey;
 }
 .form-label {
   color: $lightGrey;
 }
-.form-control {
-  background-color: $grey;
-}
 .form-floating > label {
+  color: $lightGrey;
+}
+.form-control:focus {
   color: $lightGrey;
 }
 .row .form-floating > .form-control:focus ~ label,
 .row .form-floating > .form-control:not(:placeholder-shown) ~ label,
 .row .form-floating > .form-select ~ label {
   opacity: 1;
+}
+.btn {
+  border-radius: 0.5rem;
 }
 
 .btn-primary {
@@ -108,9 +130,9 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
 }
 
 .pagination .page-link,
-.page .pagination .disabled {
+.page-item .disabled {
   color: $lightGrey;
-  background-color: $grey;
+  background-color: $dark !important;
 }
 .page-item.active .page-link {
   z-index: 3;
@@ -126,6 +148,11 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
   flex-direction: row-reverse;
   align-items: flex-start;
   padding: 1rem;
+  background-color: $lightGrey;
+  color: $dark;
+}
+.card:hover {
+  color: $darkBeer;
 }
 .card-body {
   padding: 0;
@@ -158,8 +185,6 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
 
 .multi-range-slider {
   box-shadow: none;
-  //border-radius: 5px;
-  //border-color: $lightGrey;
   border: none;
   padding-top: 5px;
   padding-bottom: 5px;

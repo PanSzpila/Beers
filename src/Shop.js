@@ -105,7 +105,7 @@ function Shop(props) {
       <div>
         {/* Form - beer search */}
         <form className="row">
-          <div className="form-floating mb-3 col-sm-9 col-xl-6">
+          <div className="form-floating mb-5 col-sm-9 col-xl-6">
             <input
               type="search"
               className="form-control form-floating"
@@ -118,7 +118,7 @@ function Shop(props) {
               Beer name:
             </label>
           </div>
-          <div className="form-floating mb-3 col-sm-3 col-xl-2">
+          <div className="form-floating mb-5 col-sm-3 col-xl-2">
             <select
               className="form-select form-floating"
               value={filters.per_page}
@@ -133,7 +133,7 @@ function Shop(props) {
             </select>
             <label htmlFor="per_page">items on page:</label>
           </div>
-          <div className="form-floating mb-3 col-md-6 col-xl-4">
+          <div className="form-floating mb-5 col-md-6 col-xl-4">
             <div className="App">
               <label
                 htmlFor="MultiRange"
@@ -164,7 +164,7 @@ function Shop(props) {
             </div>
           </div>
 
-          <div className="form-floating mb-3 col-sm-6 col-md-3 col-xl-2">
+          <div className="form-floating mb-5 col-sm-6 col-md-3 col-xl-2">
             <input
               type="month"
               onChange={handleFilters}
@@ -177,7 +177,7 @@ function Shop(props) {
             <label htmlFor="brewed_after">brewed after:</label>
           </div>
 
-          <div className="form-floating mb-3 col-sm-6 col-md-3 col-xl-2">
+          <div className="form-floating mb-5 col-sm-6 col-md-3 col-xl-2">
             <input
               type="month" /*TODO: month */
               className="form-control form-floating"
@@ -188,7 +188,7 @@ function Shop(props) {
             <label htmlFor="brewed_before">brewed before:</label>
           </div>
 
-          <div className="form-floating mb-3 col-sm-6 col-xl-4">
+          <div className="form-floating mb-5 col-sm-6 col-xl-4">
             <input
               type="search"
               className="form-control form-floating"
@@ -338,7 +338,7 @@ function Shop(props) {
                         width="25"
                       />
                       <div className="card-body">
-                        <h5 className="card-title">
+                        <h5 className="card-title crop-text-2">
                           {item.id}. {item.name}
                         </h5>
                         <p className="card-text crop-text-4">
