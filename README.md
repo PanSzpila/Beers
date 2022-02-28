@@ -13,3 +13,8 @@ Based on:
     - functions
 - REST API integration
     - filtering items, showing details
+
+To do at first:
+- completely diferent theme
+- details of product
+- brief information about project in "about" page
