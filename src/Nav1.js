@@ -44,24 +44,6 @@ function Nav() {
         </div>
       </div>
     </nav>
-
-    /**     <nav className="navbar navbar-dark bg-dark">
-      <Link style={NavStyle} to="/">
-        <h3>Logo</h3>
-      </Link>
-
-      <ul className="nav-links">
-        <Link style={NavStyle} to="/">
-          <h3>Home</h3>
-        </Link>
-        <Link style={NavStyle} to="/about">
-          <li>About</li>
-        </Link>
-        <Link style={NavStyle} to="/shop">
-          <li>Shop</li>
-        </Link>
-      </ul>
-    </nav> */
   );
 }
 

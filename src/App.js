@@ -1,7 +1,8 @@
 //https://www.youtube.com/watch?v=Law7wfdg_ls   30' "
 
 import { useState } from "react";
-import Nav from "./Nav";
+import Nav from "./Nav1";
+import Home from "./Home";
 import About from "./About";
 import Shop from "./Shop";
 import ItemDetail from "./ItemDetail";
@@ -34,11 +35,5 @@ function App() {
     </Router>
   );
 }
-
-const Home = () => (
-  <div>
-    <h1> Home Page </h1>
-  </div>
-);
 
 export default App;

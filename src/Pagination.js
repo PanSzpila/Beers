@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const Pagination = (props) => {
   return (
-    <div>
+    <div className="pagination-nav">
       <nav aria-label="page">
         <ul className="pagination">
           <li className={props.page <= 1 ? "page-item disabled" : "page-item"}>

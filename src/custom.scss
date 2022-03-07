@@ -6,14 +6,17 @@ $beer: rgb(220, 191, 133);
 $darkBeer: rgb(68, 56, 53);
 $lightGrey: rgb(218, 218, 218);
 $grey: rgb(179, 179, 179);
+$disabledColor: rgb(100, 100, 100);
 
 //Bootstrap variables ovverride:
 $dark: rgb(40, 37, 32);
 $primary: $beer;
 $blue: $beer;
 
+$mainBorderRadius: 0.7rem;
+
 body {
-  background-color: $grey;
+  background-color: $dark;
 }
 
 body a {
@@ -51,7 +54,12 @@ body a:hover,
   }
 }
 
-div .navbar-collapse {
+#navbarSupportedContent ul li a {
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+}
+
+.navbar-collapse {
   flex-grow: 0;
 }
 
@@ -70,6 +78,15 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
   color: $lightBeer;
 }
 
+//Home//
+.CenterImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  height: auto;
+}
+
 .form-floating > label,
 .form-label {
   margin-left: 0.5rem;
@@ -77,7 +94,7 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
 
 .form-control,
 .form-select {
-  border-radius: 1rem;
+  border-radius: $mainBorderRadius;
   color: $lightGrey;
 }
 .row input,
@@ -108,7 +125,7 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
   opacity: 1;
 }
 .btn {
-  border-radius: 0.5rem;
+  border-radius: $mainBorderRadius;
 }
 
 .btn-primary {
@@ -126,22 +143,22 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
   background-color: $beer;
-  border-color: $lightBeer;
 }
 
 .pagination .page-link,
 .page-item .disabled {
   color: $lightGrey;
-  background-color: $dark !important;
+  background-color: $dark;
 }
 .page-item.active .page-link {
   z-index: 3;
-  color: #fff;
+  color: $dark;
   background-color: $beer;
-  border-color: $beer;
+  border-color: $lightGrey;
 }
 .page-item.disabled .page-link {
-  background-color: $grey;
+  color: $disabledColor;
+  background-color: $dark;
 }
 
 .card {
@@ -150,6 +167,7 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
   padding: 1rem;
   background-color: $lightGrey;
   color: $dark;
+  border-radius: $mainBorderRadius;
 }
 .card:hover {
   color: $darkBeer;
