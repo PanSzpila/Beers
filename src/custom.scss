@@ -161,6 +161,14 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
   background-color: $dark;
 }
 
+.svg path {
+  fill: $lightGrey;
+}
+
+.svg-active path {
+  fill: $beer;
+}
+
 .card {
   flex-direction: row-reverse;
   align-items: flex-start;
