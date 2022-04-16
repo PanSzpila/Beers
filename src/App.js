@@ -1,5 +1,3 @@
-//https://www.youtube.com/watch?v=Law7wfdg_ls   30' "
-
 import { useState } from "react";
 import Nav from "./Nav1";
 import Home from "./Home";
