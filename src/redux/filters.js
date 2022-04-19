@@ -5,36 +5,55 @@ export const filtersSlice = createSlice({
   initialState: {
     page: 1,
     per_page: 25,
-    abv_gt: undefined,
-    abv_lt: undefined,
-    beer_name: undefined,
-    brewed_before: undefined,
-    brewed_after: undefined,
-    malt: undefined,
-    food: undefined,
+    abv_gt: null,
+    abv_lt: null,
+    beer_name: null,
+    brewed_before: null,
+    brewed_after: null,
+    malt: null,
+    food: null,
   },
   reducers: {
     changeFilterPage: (state, action) => {
-      (state.page = action), payload;
+      state.page = action.payload;
+    },
+    changeFilterPer_page: (state, action) => {
+      state.per_page = action.payload;
     },
     changeFilterAbv_gt: (state, action) => {
-      (state.abv_gt = action), payload;
+      state.abv_gt = action.payload;
     },
-
-    /*    increment: (state) => {
-
-      state.count += 1;
+    changeFilterAbv_lt: (state, action) => {
+      state.abv_lt = action.payload;
     },
-    decrement: (state) => {
-      state.count -= 1;
+    changeFilterBeer_name: (state, action) => {
+      state.beer_name = action.payload;
     },
-    incrementByAmount: (state, action) => {
-      state.count += action.payload;
-    }, */
+    changeFilterBrewed_before: (state, action) => {
+      state.brewed_before = action.payload;
+    },
+    changeFilterBrewed_after: (state, action) => {
+      state.brewed_after = action.payload;
+    },
+    changeFilterMalt: (state, action) => {
+      state.malt = action.payload;
+    },
+    changeFilterFood: (state, action) => {
+      state.food = action.payload;
+    },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = filtersSlice.actions;
+export const {
+  changeFilterPage,
+  changeFilterPer_page,
+  changeFilterAbv_gt,
+  changeFilterAbv_lt,
+  changeFilterBeer_name,
+  changeFilterBrewed_before,
+  changeFilterBrewed_after,
+  changeFilterMalt,
+  changeFilterFood,
+} = filtersSlice.actions;
 
 export default filtersSlice.reducer;
