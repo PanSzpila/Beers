@@ -3,26 +3,43 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "./Pagination";
 import MultiRange from "./MultiRange";
+import {
+  changeFilterPage,
+  changeFilterPer_page,
+  changeFilterAbv_gt,
+  changeFilterAbv_lt,
+  changeFilterBeer_name,
+  changeFilterBrewed_before,
+  changeFilterBrewed_after,
+  changeFilterMalt,
+  changeFilterFood,
+} from "./redux/filters";
+
+import { resetAbvRangeTrue, resetAbvRangeFalse } from "./redux/resetAbvRange";
 
 const defaultFilters = {
   page: 1,
   per_page: 25,
-  abv_gt: undefined,
-  abv_lt: undefined,
-  beer_name: undefined,
-  brewed_before: undefined,
-  brewed_after: undefined,
-  malt: undefined,
-  food: undefined,
+  abv_gt: null,
+  abv_lt: null,
+  beer_name: null,
+  brewed_before: null,
+  brewed_after: null,
+  malt: null,
+  food: null,
 };
 
 function Shop(props) {
+  const reduxFilters = useSelector((state) => state.filters);
+  const resetAbvRange = useSelector((state) => state.resetAbvRange.reset);
+  const dispatch = useDispatch();
+
   const maxAbv = 15; //here You can set maximal alcohol percent ratio available in items search filters and range input
   const maxPages = 13; //here You can set maximal number of pages in items list
   const [showCards, setShowCards] = useState(true); // options of display items: true - displays cards, false - displays table
   const [items, setItems] = useState([]);
   const [filters, setFilters] = useState(defaultFilters);
-  const [resetAbvRange, setResetAbvRange] = useState(false); //reset multi range slider to default knobs position.
+  // const [resetAbvRange, setResetAbvRange] = useState(false); //reset multi range slider to default knobs position.
   const [brewed_beforeDate, setBrewed_beforeDate] = useState(new Date()); //similar to filters.brewed_before, but here is date format, and filters.brewed_before is in api-friendly string
   const [brewed_afterDate, setBrewed_afterDate] = useState(); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
   const [wrongSearchDescription, setWrongSearchDescription] = useState(
@@ -38,12 +55,16 @@ function Shop(props) {
     fetchItems(urlWithFilters());
   }, [filters]);
 
+  useEffect(() => {
+    console.log(`resetAbvRange changed to ${resetAbvRange}`);
+  }, [resetAbvRange]);
+
   const urlWithFilters = () => {
     if (filters === defaultFilters) return props.apiUrl;
     let changedAdress = props.apiUrl + "?";
 
     for (const [key, value] of Object.entries(filters)) {
-      if (value !== undefined && value !== "") {
+      if (value != null && value !== "") {
         changedAdress = changedAdress + key + "=" + value + "&";
       }
     }
@@ -54,8 +75,8 @@ function Shop(props) {
   const handleFilters = (e) => {
     const { name } = e.target;
     let { value } = e.target;
-    if (value === "undefined") {
-      value = undefined;
+    if (value == "null" || value === "undefined") {
+      value = null;
     }
     if (name === "brewed_before" || name === "brewed_after") {
       const d = new Date(value);
@@ -159,8 +180,6 @@ function Shop(props) {
                     page: 1,
                   }));
                 }}
-                reset={resetAbvRange}
-                reseted={() => setResetAbvRange(false)}
               />
             </div>
           </div>
@@ -223,7 +242,7 @@ function Shop(props) {
               value="reset filters"
               onClick={() => {
                 setFilters({ ...defaultFilters });
-                setResetAbvRange(true);
+                dispatch(resetAbvRangeTrue());
               }}
             ></input>
           </div>

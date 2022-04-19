@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "./counter";
 import filtersReducer from "./filters";
+import resetAbvRangeReducer from "./resetAbvRange";
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     filters: filtersReducer,
+    resetAbvRange: resetAbvRangeReducer,
   },
 });
 

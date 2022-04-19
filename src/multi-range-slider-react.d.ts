@@ -1,0 +1,1 @@
+declare module 'multi-range-slider-react';

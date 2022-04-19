@@ -1,9 +1,17 @@
 /*  https://github.com/developergovindgupta/multi-range-slider-react */
 
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import MultiRangeSlider from "multi-range-slider-react";
+import {
+  resetAbvRangeTrue,
+  resetAbvRangeFalse,
+  resetAbvRange,
+} from "./redux/resetAbvRange";
 
 function MultiRange(props) {
+  const reset = useSelector((state) => state.resetAbvRange.reset);
+  const dispatch = useDispatch();
   const [minValue, set_minValue] = useState(props.minValue);
   const [maxValue, set_maxValue] = useState(props.maxValue);
   const handleInput = (e) => {
@@ -20,13 +28,13 @@ function MultiRange(props) {
 
   useEffect(() => {
     resetRange();
-  }, [props.reset]);
+  }, [reset]);
 
   const resetRange = () => {
-    if (props.reset) {
+    if (reset) {
       set_minValue(props.minValue);
       set_maxValue(props.maxValue);
-      props.reseted();
+      dispatch(resetAbvRangeFalse());
     }
   };
 
