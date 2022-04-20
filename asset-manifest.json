@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Beers/static/css/main.eac7b48c.css",
+    "main.css": "/Beers/static/css/main.0578027c.css",
     "main.js": "/Beers/static/js/main.ab24b390.js",
     "static/media/Two beer skeleton.jpg": "/Beers/static/media/Two beer skeleton.e5599e40308f8594e296.jpg",
     "index.html": "/Beers/index.html",
-    "main.eac7b48c.css.map": "/Beers/static/css/main.eac7b48c.css.map",
+    "main.0578027c.css.map": "/Beers/static/css/main.0578027c.css.map",
     "main.ab24b390.js.map": "/Beers/static/js/main.ab24b390.js.map"
   },
   "entrypoints": [
-    "static/css/main.eac7b48c.css",
+    "static/css/main.0578027c.css",
     "static/js/main.ab24b390.js"
   ]
 }
