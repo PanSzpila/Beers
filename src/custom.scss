@@ -210,18 +210,18 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
 }
 
 .multi-range-slider {
-  box-shadow: none;
-  border: none;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  box-shadow: none !important;
+  border: none !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
 
   .bar-inner {
-    background-color: $lightBeer;
-    box-shadow: inset 0px 0px 5px $beer;
+    background-color: $lightBeer !important;
+    box-shadow: inset 0px 0px 5px $beer !important;
   }
 
-  .thumb .max-value,
+  .thumb .max-value ,
   .thumb .min-value {
-    background-color: $beer;
+    background-color: $beer !important;
   }
 }
