@@ -7,6 +7,7 @@ Based on:
 - React with functional components with hooks
     - own components as well as component imported via npm
     - react router
+- redux
 - bootstrap
 - custom SCSS (sass)
     - variables
