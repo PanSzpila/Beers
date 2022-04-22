@@ -8,8 +8,14 @@ import {
   resetAbvRangeFalse,
   resetAbvRange,
 } from "./redux/resetAbvRange";
+import {
+  changeFilterAbv_gt,
+  changeFilterAbv_lt,
+  changeFilterPage,
+} from "./redux/filters";
 
 function MultiRange(props) {
+  const filters = useSelector((state) => state.filters);
   const reset = useSelector((state) => state.resetAbvRange.reset);
   const dispatch = useDispatch();
   const [minValue, set_minValue] = useState(props.minValue);
@@ -21,7 +27,10 @@ function MultiRange(props) {
 
   useEffect(() => {
     const output = (minValue, maxValue) => {
-      props.setAbv(minValue, maxValue);
+      dispatch(changeFilterAbv_gt(minValue));
+      dispatch(changeFilterAbv_lt(maxValue));
+      dispatch(changeFilterPage(1));
+      //     props.setAbv(minValue, maxValue);
     };
     output(minValue, maxValue);
   }, [minValue, maxValue]);

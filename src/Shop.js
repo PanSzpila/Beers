@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Modal } from "bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "./Pagination";
 import MultiRange from "./MultiRange";
 import {
   changeFilterPage,
+  changeFilterPageIncrement,
+  changeFilterPageDecrement,
   changeFilterPer_page,
   changeFilterAbv_gt,
   changeFilterAbv_lt,
@@ -13,6 +16,7 @@ import {
   changeFilterBrewed_after,
   changeFilterMalt,
   changeFilterFood,
+  resetFilters,
 } from "./redux/filters";
 
 import { resetAbvRangeTrue, resetAbvRangeFalse } from "./redux/resetAbvRange";
@@ -30,15 +34,15 @@ const defaultFilters = {
 };
 
 function Shop(props) {
-  const reduxFilters = useSelector((state) => state.filters);
-  const resetAbvRange = useSelector((state) => state.resetAbvRange.reset);
+  const filters = useSelector((state) => state.filters);
+  const resetAbvRange = useSelector((state) => state.resetAbvRange.reset); //resets multi range slider to default knobs position.
   const dispatch = useDispatch();
 
   const maxAbv = 15; //here You can set maximal alcohol percent ratio available in items search filters and range input
   const maxPages = 13; //here You can set maximal number of pages in items list
   const [showCards, setShowCards] = useState(true); // options of display items: true - displays cards, false - displays table
   const [items, setItems] = useState([]);
-  const [filters, setFilters] = useState(defaultFilters);
+  const [filters2, setFilters2] = useState(defaultFilters);
   // const [resetAbvRange, setResetAbvRange] = useState(false); //reset multi range slider to default knobs position.
   const [brewed_beforeDate, setBrewed_beforeDate] = useState(new Date()); //similar to filters.brewed_before, but here is date format, and filters.brewed_before is in api-friendly string
   const [brewed_afterDate, setBrewed_afterDate] = useState(); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
@@ -54,10 +58,6 @@ function Shop(props) {
 
     fetchItems(urlWithFilters());
   }, [filters]);
-
-  useEffect(() => {
-    console.log(`resetAbvRange changed to ${resetAbvRange}`);
-  }, [resetAbvRange]);
 
   const urlWithFilters = () => {
     if (filters === defaultFilters) return props.apiUrl;
@@ -89,38 +89,37 @@ function Shop(props) {
         brewed_afterDate &&
         brewed_beforeDate.getTime() > brewed_afterDate.getTime()
       ) {
-        let WrongSearch = new bootstrap.Modal(
-          document.getElementById("WrongSearch")
-        );
+        let WrongSearch = new Modal(document.getElementById("WrongSearch"));
         setWrongSearchDescription(
           'in your search, "brewed after" date must be earlier than "brewed before".'
         );
         WrongSearch.show();
       }
     }
-    setFilters((prevState) => ({
-      ...prevState,
-      [name]: value,
-      page: 1,
-    }));
-  };
 
-  const changePage = (direction) => {
-    let value = filters.page + direction;
-    if (value < 1 || value > maxPages) {
-      return console.log("page number beyond the scope");
+    if (name === "per_page") {
+      return dispatch(changeFilterPer_page(value));
     }
-    setFilters((prevState) => ({
-      ...prevState,
-      page: value,
-    }));
+    if (name === "beer_name") {
+      return dispatch(changeFilterBeer_name(value));
+    }
+    if (name === "brewed_before") {
+      return dispatch(changeFilterBrewed_before(value));
+    }
+    if (name === "brewed_after") {
+      return dispatch(changeFilterBrewed_after(value));
+    }
+    if (name === "malt") {
+      return dispatch(changeFilterMalt(value));
+    }
+    if (name === "food") {
+      return dispatch(changeFilterFood(value));
+    } else {
+      return console.warn(
+        "wrong filter name in handleFilters function (possibly input name)"
+      );
+    }
   };
-
-  const setPage = (newPage) =>
-    setFilters((prevState) => ({
-      ...prevState,
-      page: newPage,
-    }));
 
   return (
     <div className="container-lg bg-dark px-5 py-5">
@@ -130,7 +129,7 @@ function Shop(props) {
           <div className="form-floating mb-5 col-sm-9 col-xl-6">
             <input
               type="search"
-              className="form-control form-floating"
+              className="form-control form-floating text-light"
               id="beer_name"
               name="beer_name"
               placeholder="beer name"
@@ -173,7 +172,7 @@ function Shop(props) {
                 ruler={false}
                 label={false}
                 setAbv={(minValue, maxValue) => {
-                  setFilters((prevState) => ({
+                  setFilters2((prevState) => ({
                     ...prevState,
                     abv_gt: minValue,
                     abv_lt: maxValue,
@@ -241,7 +240,7 @@ function Shop(props) {
               className="btn btn-primary"
               value="reset filters"
               onClick={() => {
-                setFilters({ ...defaultFilters });
+                dispatch(resetFilters());
                 dispatch(resetAbvRangeTrue());
               }}
             ></input>
@@ -255,12 +254,7 @@ function Shop(props) {
         <div className="d-flex justify-content-between">
           {/* Pagination and buttons - toggle View */}
           <div className="col-auto">
-            <Pagination
-              page={filters.page}
-              maxPages={maxPages}
-              changePage={(newPage) => changePage(newPage)}
-              setPage={(newPage) => setPage(newPage)}
-            />
+            <Pagination maxPages={maxPages} />
           </div>
           <div className="col-auto">
             {/* buttons - toggle View */}
@@ -370,10 +364,7 @@ function Shop(props) {
           </div>
         </div>
         <Pagination // Pagination
-          page={filters.page}
           maxPages={maxPages}
-          changePage={(newPage) => changePage(newPage)}
-          setPage={(newPage) => setPage(newPage)}
         />
       </div>
       <div

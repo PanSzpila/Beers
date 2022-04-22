@@ -209,6 +209,8 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
   padding: 0;
 }
 
+//multi-range-slider is component imported via npm, and has it's own css. For some reason, customisation of this cmponent below, works only on localhost, not on site deplowyed on web. Thats a reason od temporary !important flags
+
 .multi-range-slider {
   box-shadow: none !important;
   border: none !important;

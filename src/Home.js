@@ -9,8 +9,8 @@ const Home = () => {
           className="CenterImg"
           src={Skeleton}
           alt="Skeleton image"
-          width="500"
-          height="500"
+          width="300"
+          height="300"
         />
       </div>
 
@@ -36,12 +36,13 @@ const Home = () => {
           <li>functions</li>
         </ul>
         <li>REST API integration</li>
-        <li>filtering items, showing details</li>
+        <ul>
+          <li>filtering items, showing details</li>
+        </ul>
       </ul>
       <h5>To do at first:</h5>
       <ul>
-        completely diferent theme (in progress)
-        <li>move couple of states to redux store (in progress)</li>
+        <li>completely diferent theme (in progress)</li>
         <li>details of product</li>
       </ul>
       <h5>Known Issues (starting from most important): CSS:</h5>

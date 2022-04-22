@@ -1,51 +1,74 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeFilterPage,
+  changeFilterPageIncrement,
+  changeFilterPageDecrement,
+} from "./redux/filters";
 
 const Pagination = (props) => {
+  const page = useSelector((state) => state.filters.page);
+  const dispatch = useDispatch();
+
   return (
     <div className="pagination-nav">
       <nav aria-label="page">
         <ul className="pagination">
-          <li className={props.page <= 1 ? "page-item disabled" : "page-item"}>
-            <a className="page-link" onClick={() => props.changePage(-1)}>
+          <li className={page <= 1 ? "page-item disabled" : "page-item"}>
+            <a
+              className="page-link"
+              onClick={() => dispatch(changeFilterPageDecrement())}
+            >
               &#8592;
             </a>
           </li>
-          <li className={props.page === 1 ? "page-item active" : "page-item"}>
-            <a className="page-link" href="#" onClick={() => props.setPage(1)}>
+          <li className={page === 1 ? "page-item active" : "page-item"}>
+            <a
+              className="page-link"
+              href="#"
+              onClick={() => dispatch(changeFilterPage(1))}
+            >
               1
             </a>
           </li>
           <li
-            className={props.page === 2 ? "page-item active" : "page-item"}
+            className={page === 2 ? "page-item active" : "page-item"}
             aria-current="page"
           >
-            <a className="page-link" href="#" onClick={() => props.setPage(2)}>
+            <a
+              className="page-link"
+              href="#"
+              onClick={() => dispatch(changeFilterPage(2))}
+            >
               2
             </a>
           </li>
-          <li className={props.page === 3 ? "page-item active" : "page-item"}>
-            <a className="page-link" href="#" onClick={() => props.setPage(3)}>
+          <li className={page === 3 ? "page-item active" : "page-item"}>
+            <a
+              className="page-link"
+              href="#"
+              onClick={() => dispatch(changeFilterPage(3))}
+            >
               3
             </a>
           </li>
 
           <li
-            style={props.page <= 3 ? { display: "none" } : {}}
+            style={page <= 3 ? { display: "none" } : {}}
             className="page-item active"
           >
-            <a className="page-link">{props.page}</a>
+            <a className="page-link">{page}</a>
           </li>
 
           <li
             className={
-              props.page === props.maxPages ? "page-item disabled" : "page-item"
+              page === props.maxPages ? "page-item disabled" : "page-item"
             }
           >
             <a
               className="page-link"
               href="#"
-              onClick={() => props.changePage(1)}
+              onClick={() => dispatch(changeFilterPageIncrement())}
             >
               &#8594;
             </a>

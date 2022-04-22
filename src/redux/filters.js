@@ -1,21 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+const initialState = {
+  page: 1,
+  per_page: 25,
+  abv_gt: null,
+  abv_lt: null,
+  beer_name: null,
+  brewed_before: null,
+  brewed_after: null,
+  malt: null,
+  food: null,
+};
+
 export const filtersSlice = createSlice({
   name: "filters",
-  initialState: {
-    page: 1,
-    per_page: 25,
-    abv_gt: null,
-    abv_lt: null,
-    beer_name: null,
-    brewed_before: null,
-    brewed_after: null,
-    malt: null,
-    food: null,
-  },
+  initialState,
   reducers: {
     changeFilterPage: (state, action) => {
       state.page = action.payload;
+    },
+    changeFilterPageIncrement: (state) => {
+      state.page += 1;
+    },
+    changeFilterPageDecrement: (state) => {
+      state.page -= 1;
     },
     changeFilterPer_page: (state, action) => {
       state.per_page = action.payload;
@@ -41,11 +49,14 @@ export const filtersSlice = createSlice({
     changeFilterFood: (state, action) => {
       state.food = action.payload;
     },
+    resetFilters: () => initialState,
   },
 });
 
 export const {
   changeFilterPage,
+  changeFilterPageIncrement,
+  changeFilterPageDecrement,
   changeFilterPer_page,
   changeFilterAbv_gt,
   changeFilterAbv_lt,
@@ -54,6 +65,7 @@ export const {
   changeFilterBrewed_after,
   changeFilterMalt,
   changeFilterFood,
+  resetFilters,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
