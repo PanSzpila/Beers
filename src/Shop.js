@@ -20,6 +20,7 @@ import {
 } from "./redux/filters";
 
 import { resetAbvRangeTrue, resetAbvRangeFalse } from "./redux/resetAbvRange";
+import { actualItemId } from "./redux/actualItem";
 
 const defaultFilters = {
   page: 1,
@@ -34,7 +35,7 @@ const defaultFilters = {
 };
 
 function Shop(props) {
-  const filters = useSelector((state) => state.filters);
+  const { filters } = useSelector((state) => state);
   const resetAbvRange = useSelector((state) => state.resetAbvRange.reset); //resets multi range slider to default knobs position.
   const dispatch = useDispatch();
 
@@ -122,7 +123,7 @@ function Shop(props) {
   };
 
   return (
-    <div className="container-lg bg-dark px-5 py-5">
+    <div className="container-lg bg-dark text-light px-5 py-5">
       <div>
         {/* Form - beer search */}
         <form className="row">
@@ -318,7 +319,7 @@ function Shop(props) {
                       to={`/shop/${item.name
                         .replace(/ /g, "-")
                         .replace(/\//g, "-")}`}
-                      onClick={() => props.GetId(item.id)}
+                      onClick={() => dispatch(actualItemId(item.id))}
                     >
                       {item.name}
                     </Link>
@@ -339,7 +340,7 @@ function Shop(props) {
                     to={`/shop/${item.name
                       .replace(/ /g, "-")
                       .replace(/\//g, "-")}`}
-                    onClick={() => props.GetId(item.id)}
+                    onClick={() => dispatch(actualItemId(item.id))}
                   >
                     <div className="card">
                       <img

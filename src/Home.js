@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Skeleton from "./images/Two beer skeleton.jpg";
 
 const Home = () => {
@@ -9,8 +10,8 @@ const Home = () => {
           className="CenterImg"
           src={Skeleton}
           alt="Skeleton image"
-          width="300"
-          height="300"
+          width="20"
+          height="20"
         />
       </div>
 
@@ -19,7 +20,10 @@ const Home = () => {
         Fake site when user can search for interesting beers and view details.
       </h4>
 
-      <h2>klick the "Shop" tab. The interesting features are there.</h2>
+      <h2>
+        klick the <Link to="/shop">"Shop"</Link> tab{" "}
+        <Link to="/shop">(or here)</Link>. The interesting features are there.
+      </h2>
       <h5>Based on:</h5>
       <ul>
         <li>HTML, CSS, JavaScript, of course.</li>
@@ -49,12 +53,12 @@ const Home = () => {
 
       <ul>
         <li>
-          Hamburger menu on navbar does'n work (back in the days there was
-          probably some conflict in .navbar-collapse class, but now I can't find
-          it). pagination border-radius to small (should be 0,7 like everywhere
-          else ($mainBorderRadius in custom.css:16) "bird symbol" in shop,
-          "items on page" is dark, should be $lightGrey, but there is no class
-          where i can change it).
+          Pagination border-radius to small (should be 0,7 like everywhere else
+          ($mainBorderRadius in custom.css:16)
+        </li>
+        <li>
+          "bird symbol" in shop, "items on page" is dark, should be $lightGrey,
+          but there is no class where i can change it).
         </li>
       </ul>
     </div>

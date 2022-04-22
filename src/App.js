@@ -7,7 +7,6 @@ import Shop from "./Shop";
 import ItemDetail from "./ItemDetail";
 
 function App() {
-  const [itemId, setItemId] = useState([]);
   const apiUrl = "https://api.punkapi.com/v2/beers";
 
   return (
@@ -15,19 +14,10 @@ function App() {
       <div>
         <Nav />
         <Routes>
-          <Route path="/" exact element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route
-            path="/shop"
-            exact
-            element={
-              <Shop apiUrl={apiUrl} GetId={(itemId) => setItemId(itemId)} />
-            }
-          />
-          <Route
-            path="/shop/:name"
-            element={<ItemDetail apiUrl={apiUrl} itemId={itemId} />}
-          />
+          <Route path="/shop" exact element={<Shop apiUrl={apiUrl} />} />
+          <Route path="/shop/:name" element={<ItemDetail apiUrl={apiUrl} />} />
         </Routes>
       </div>
     </Router>
