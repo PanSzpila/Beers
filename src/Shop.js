@@ -5,12 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Pagination from "./Pagination";
 import MultiRange from "./MultiRange";
 import {
-  changeFilterPage,
-  changeFilterPageIncrement,
-  changeFilterPageDecrement,
   changeFilterPer_page,
-  changeFilterAbv_gt,
-  changeFilterAbv_lt,
   changeFilterBeer_name,
   changeFilterBrewed_before,
   changeFilterBrewed_after,
@@ -19,7 +14,7 @@ import {
   resetFilters,
 } from "./redux/filters";
 
-import { resetAbvRangeTrue, resetAbvRangeFalse } from "./redux/resetAbvRange";
+import { resetAbvRangeTrue } from "./redux/resetAbvRange";
 import { actualItemId } from "./redux/actualItem";
 
 const defaultFilters = {

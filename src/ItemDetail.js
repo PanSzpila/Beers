@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 function ItemDetail(props) {
@@ -19,6 +19,27 @@ function ItemDetail(props) {
   }, []);
 
   console.log(item);
+
+  const renderTooltipIBU = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      International Bitterness Units scale. A gauge of beer's bitterness. What
+      IBUs measure are the parts per million of isohumulone found in a beer.
+    </Tooltip>
+  );
+  const renderTooltipSRM = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Beer Color The Standard Reference Method.
+    </Tooltip>
+  );
+  const renderTooltipAttenuation = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      In brewing, attenuation refers to the conversion of sugars into alcohol
+      and carbon dioxide by the fermentation process; the greater the
+      attenuation, the more sugar has been converted into alcohol. A more
+      attenuated beer is drier and more alcoholic than a less attenuated beer
+      made from the same wort.
+    </Tooltip>
+  );
 
   return (
     <div className="container-lg bg-dark text-light px-5 py-5">
@@ -48,9 +69,9 @@ function ItemDetail(props) {
                   Malt:
                   <ul>
                     {item &&
-                      item.ingredients.malt.map((malt) => (
+                      item.ingredients.malt.map((malt, index) => (
                         <li
-                          key={malt.name}
+                          key={index}
                         >{`${malt.name} - ${malt.amount.value} ${malt.amount.unit}`}</li>
                       ))}
                   </ul>
@@ -59,9 +80,9 @@ function ItemDetail(props) {
                   Hops:
                   <ul>
                     {item &&
-                      item.ingredients.hops.map((hop) => (
+                      item.ingredients.hops.map((hop, index) => (
                         <li
-                          key={hop.name}
+                          key={index}
                         >{`${hop.name} - ${hop.amount.value} ${hop.amount.unit}`}</li>
                       ))}
                   </ul>
@@ -69,17 +90,34 @@ function ItemDetail(props) {
                 <li>Yeast: {item && ` ${item.ingredients.yeast}`}</li>
               </ul>
             </li>
-            <OverlayTrigger
-              placement="bottom"
-              overlay={
-                <Tooltip id="button-tooltip-2">Check out this avatar</Tooltip>
-              }
-            >
-              {({ ref, ...triggerHandler }) => <li>IBU: {item && item.ibu}</li>}
-            </OverlayTrigger>
-
-            <li>SRM: {item && item.srm}</li>
-            <li>Attenuation level: {item && item.attenuation_level}</li>
+            <li>alcohol (ABV): {item && item.abv} %</li>
+            <li>
+              <OverlayTrigger
+                placement="right"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltipIBU}
+              >
+                <span>IBU: {item && item.ibu}</span>
+              </OverlayTrigger>
+            </li>
+            <li>
+              <OverlayTrigger
+                placement="right"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltipSRM}
+              >
+                <span>SRM: {item && item.srm}</span>
+              </OverlayTrigger>
+            </li>
+            <li>
+              <OverlayTrigger
+                placement="right"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltipAttenuation}
+              >
+                <span>Attenuation level: {item && item.attenuation_level}</span>
+              </OverlayTrigger>
+            </li>
             <li>Tagline: {item && item.tagline}</li>
             <li>contributed by: {item && item.contributed_by}</li>
             <li>item id: {item && id}</li>

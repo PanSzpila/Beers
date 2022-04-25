@@ -1,4 +1,4 @@
-// This file is not in use.
+// This file is not in use. Its for info, how multi range slider component is built
 
 class DoubleRangeSlider extends React.Component {
   state = {

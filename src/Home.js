@@ -45,10 +45,7 @@ const Home = () => {
         </ul>
       </ul>
       <h5>To do at first:</h5>
-      <ul>
-        <li>completely diferent theme (in progress)</li>
-        <li>details of product</li>
-      </ul>
+      <ul></ul>
       <h5>Known Issues (starting from most important): CSS:</h5>
 
       <ul>

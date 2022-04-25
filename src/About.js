@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function About() {
   return (
     <div className="container-lg bg-dark text-light px-5 pb-5">
@@ -7,8 +9,8 @@ function About() {
       </h4>
 
       <h2>
-        klick the "Shop" tab, for most interesting features, or "home" for
-        description.
+        klick the <Link to="/Shop">"shop"</Link> tab, for most interesting
+        features, or "home" for description.
       </h2>
     </div>
   );
