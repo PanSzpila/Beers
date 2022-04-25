@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Nav from "./Nav1";
+import Nav from "./Nav2";
 import Home from "./Home";
 import About from "./About";
 import Shop from "./Shop";
@@ -10,7 +9,7 @@ function App() {
   const apiUrl = "https://api.punkapi.com/v2/beers";
 
   return (
-    <Router>
+    <Router basename="/Beers">
       <div>
         <Nav />
         <Routes>
