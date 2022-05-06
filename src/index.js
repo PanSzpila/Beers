@@ -12,5 +12,5 @@ ReactDOM.render(
       <App />
     </Provider>
   </StrictMode>,
-  document.getElementById("root")
+  document.getElementById("root") || document.createElement("div") // for testing
 );

@@ -122,7 +122,10 @@ function Shop(props) {
       <div>
         {/* Form - beer search */}
         <form className="row">
-          <div className="form-floating mb-5 col-sm-9 col-xl-6">
+          <div
+            className="form-floating mb-5 col-sm-9 col-xl-6"
+            data-testid="form-label-beer-name"
+          >
             <input
               type="search"
               className="form-control form-floating text-light"
