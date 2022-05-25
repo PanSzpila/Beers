@@ -3,11 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MultiRangeSlider from "multi-range-slider-react";
-import {
-  resetAbvRangeTrue,
-  resetAbvRangeFalse,
-  resetAbvRange,
-} from "./redux/resetAbvRange";
+import { resetAbvRangeFalse } from "./redux/resetAbvRange";
 import {
   changeFilterAbv_gt,
   changeFilterAbv_lt,

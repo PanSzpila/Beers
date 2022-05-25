@@ -31,15 +31,12 @@ const defaultFilters = {
 
 function Shop(props) {
   const { filters } = useSelector((state) => state);
-  const resetAbvRange = useSelector((state) => state.resetAbvRange.reset); //resets multi range slider to default knobs position.
   const dispatch = useDispatch();
 
   const maxAbv = 15; //here You can set maximal alcohol percent ratio available in items search filters and range input
   const maxPages = 13; //here You can set maximal number of pages in items list
   const [showCards, setShowCards] = useState(true); // options of display items: true - displays cards, false - displays table
   const [items, setItems] = useState([]);
-  const [filters2, setFilters2] = useState(defaultFilters);
-  // const [resetAbvRange, setResetAbvRange] = useState(false); //reset multi range slider to default knobs position.
   const [brewed_beforeDate, setBrewed_beforeDate] = useState(new Date()); //similar to filters.brewed_before, but here is date format, and filters.brewed_before is in api-friendly string
   const [brewed_afterDate, setBrewed_afterDate] = useState(); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
   const [wrongSearchDescription, setWrongSearchDescription] = useState(
@@ -75,11 +72,12 @@ function Shop(props) {
       value = null;
     }
     if (name === "brewed_before" || name === "brewed_after") {
-      const d = new Date(value);
+      const date = new Date(value);
       name === "brewed_before"
-        ? setBrewed_beforeDate(d)
-        : setBrewed_afterDate(d);
-      value = ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getFullYear();
+        ? setBrewed_beforeDate(date)
+        : setBrewed_afterDate(date);
+      value =
+        ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
       if (
         brewed_beforeDate &&
         brewed_afterDate &&
@@ -170,14 +168,6 @@ function Shop(props) {
                 step={1}
                 ruler={false}
                 label={false}
-                setAbv={(minValue, maxValue) => {
-                  setFilters2((prevState) => ({
-                    ...prevState,
-                    abv_gt: minValue,
-                    abv_lt: maxValue,
-                    page: 1,
-                  }));
-                }}
               />
             </div>
           </div>
@@ -374,7 +364,7 @@ function Shop(props) {
       </div>
 
       <div
-        className="modal fade"
+        className="modal fade text-dark"
         id="WrongSearch"
         tabIndex="-1"
         aria-labelledby="WrongSearchLabel"

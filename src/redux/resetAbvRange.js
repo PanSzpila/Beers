@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const counterSlice = createSlice({
+export const resetAbvSlice = createSlice({
   name: "resetAbvRange",
   initialState: { reset: false },
   reducers: {
@@ -11,11 +11,11 @@ export const counterSlice = createSlice({
       state.reset = false;
     },
     resetAbvRange: (state, action) => {
-      state.count = action.payload;
+      state.reset = action.payload;
     },
   },
 });
 export const { resetAbvRangeTrue, resetAbvRangeFalse, resetAbvRange } =
-  counterSlice.actions;
+  resetAbvSlice.actions;
 
-export default counterSlice.reducer;
+export default resetAbvSlice.reducer;
