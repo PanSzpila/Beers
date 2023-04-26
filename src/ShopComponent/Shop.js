@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Modal } from "bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Pagination from "./Pagination";
+import Pagination from "../Pagination";
 import MultiRange from "./MultiRange";
 import {
   changeFilterPer_page,
@@ -12,10 +12,10 @@ import {
   changeFilterMalt,
   changeFilterFood,
   resetFilters,
-} from "./redux/filters";
+} from "../redux/filters";
 
-import { resetAbvRangeTrue } from "./redux/resetAbvRange";
-import { actualItemId } from "./redux/actualItem";
+import { resetAbvRangeTrue } from "../redux/resetAbvRange";
+import { actualItemId } from "../redux/actualItem";
 
 const defaultFilters = {
   page: 1,
