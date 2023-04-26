@@ -59,7 +59,9 @@ function ItemDetail(props) {
             <li>
               Volume: {item && `${item.volume.value} ${item.volume.unit}`}
             </li>
-            <li>Food pairing: {item && item.food_pairing}</li>
+            <li data-testid="food-pairing">
+              Food pairing: {item && item.food_pairing}
+            </li>
             <li>Brewer's tips: {item && item.brewers_tips}</li>
             <li>first brewed: {item && item.first_brewed}</li>
             <li>

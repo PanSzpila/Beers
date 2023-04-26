@@ -13,19 +13,17 @@ import reducer, {
   resetFilters,
 } from "../redux/filters";
 
-it("returns the initial state", () => {
-  expect(reducer(undefined, {})).toEqual({
-    page: 1,
-    per_page: 25,
-    abv_gt: null,
-    abv_lt: null,
-    beer_name: null,
-    brewed_before: null,
-    brewed_after: null,
-    malt: null,
-    food: null,
-  });
-});
+const initialState = {
+  page: 1,
+  per_page: 25,
+  abv_gt: null,
+  abv_lt: null,
+  beer_name: null,
+  brewed_before: null,
+  brewed_after: null,
+  malt: null,
+  food: null,
+};
 
 const previousState = {
   page: 5,
@@ -38,6 +36,10 @@ const previousState = {
   malt: "Maris Otter Extra Pale",
   food: "rice",
 };
+
+it("returns the initial state", () => {
+  expect(reducer(undefined, {})).toEqual(initialState);
+});
 
 describe("handle filters changes properly", () => {
   it("changes page to specific number", () => {
@@ -116,15 +118,5 @@ describe("handle filters changes properly", () => {
 });
 
 it("resets all filters to the initial state", () => {
-  expect(reducer(previousState, resetFilters())).toEqual({
-    page: 1,
-    per_page: 25,
-    abv_gt: null,
-    abv_lt: null,
-    beer_name: null,
-    brewed_before: null,
-    brewed_after: null,
-    malt: null,
-    food: null,
-  });
+  expect(reducer(previousState, resetFilters())).toEqual(initialState);
 });
