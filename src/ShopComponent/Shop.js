@@ -53,22 +53,26 @@ function Shop(props) {
   }, [filters]);
 
   const urlWithFilters = () => {
-    if (filters === defaultFilters) return props.apiUrl;
-    let changedAdress = props.apiUrl + "?";
+    const url = new URL("https://api.punkapi.com");
+    url.pathname = "/v2/beers";
 
-    for (const [key, value] of Object.entries(filters)) {
-      if (value != null && value !== "") {
-        changedAdress = changedAdress + key + "=" + value + "&";
-      }
+    const filterPairs = Object.entries(filters).filter(
+      ([key, value]) => value !== null
+    );
+    const filterStrings = filterPairs.map(([key, value]) => `${key}=${value}`);
+    const filterQuery = filterStrings.join("&");
+
+    if (filterQuery) {
+      url.search = "?" + filterQuery;
     }
-    changedAdress = changedAdress.slice(0, -1);
-    return changedAdress;
+
+    return url.href;
   };
 
   const handleFilters = (e) => {
     const { name } = e.target;
     let { value } = e.target;
-    if (value == "null" || value === "undefined") {
+    if (value == "null" || value == "undefined") {
       value = null;
     }
     if (name === "brewed_before" || name === "brewed_after") {
@@ -91,28 +95,37 @@ function Shop(props) {
       }
     }
 
-    if (name === "per_page") {
-      return dispatch(changeFilterPer_page(value));
+    function createFiltersDispatches(filters) {
+      const filtersDispatches = {};
+      for (const [key, value] of Object.entries(filters)) {
+        filtersDispatches[key] = dispatch(
+          `changeFilter${key.charAt(0).toUpperCase() + key.slice(1)}(value)`
+        );
+      }
+      return filtersDispatches;
     }
-    if (name === "beer_name") {
-      return dispatch(changeFilterBeer_name(value));
-    }
-    if (name === "brewed_before") {
-      return dispatch(changeFilterBrewed_before(value));
-    }
-    if (name === "brewed_after") {
-      return dispatch(changeFilterBrewed_after(value));
-    }
-    if (name === "malt") {
-      return dispatch(changeFilterMalt(value));
-    }
-    if (name === "food") {
-      return dispatch(changeFilterFood(value));
-    } else {
-      return console.warn(
-        "wrong filter name in handleFilters function (possibly input name)"
-      );
-    }
+
+    const filtersDispatches = {
+      page: dispatch(changeFilterPage(value)),
+      per_page: dispatch(changeFilterPer_page(value)),
+      abv_gt: dispatch(changeFilterAbv_gt(value)),
+      abv_lt: dispatch(changeFilterAbv_lt(value)),
+      beer_name: dispatch(changeFilterBeer_name(value)),
+      brewed_before: dispatch(changeFilterBrewed_before(value)),
+      brewed_after: dispatch(changeFilterBrewed_after(value)),
+      malt: dispatch(changeFilterMalt(value)),
+      food: dispatch(changeFilterFood(value)),
+    };
+
+    const makeDispatch = Object.entries(filtersDispatches).filter(
+      ([key, value]) => key === name
+    );
+
+    return makeDispatch
+      ? makeDispatch
+      : console.warn(
+          "wrong filter name in handleFilters function (possibly input name)"
+        );
   };
 
   return (
