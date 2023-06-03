@@ -17,57 +17,27 @@ import { resetAbvRangeTrue } from "../redux/resetAbvRange";
 import { actualItemId } from "../redux/actualItem";
 import { getBeersData } from "../redux/allBeers";
 
-const defaultFilters = {
-  page: 1,
-  per_page: 25,
-  abv_gt: null,
-  abv_lt: null,
-  beer_name: null,
-  brewed_before: null,
-  brewed_after: null,
-  malt: null,
-  food: null,
-};
-
 function Shop(props) {
   const { filters } = useSelector((state) => state);
+  const items = useSelector((state) => state.allBeers.beersList);
   const dispatch = useDispatch();
 
   const maxAbv = 15; //here You can set maximal alcohol percent ratio available in items search filters and range input
   const maxPages = 13; //here You can set maximal number of pages in items list
   const [showCards, setShowCards] = useState(true); // options of display items: true - displays cards, false - displays table
-  const [items, setItems] = useState([]);
   const [brewed_beforeDate, setBrewed_beforeDate] = useState(new Date()); //similar to filters.brewed_before, but here is date format, and filters.brewed_before is in api-friendly string
   const [brewed_afterDate, setBrewed_afterDate] = useState(); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
   const [wrongSearchDescription, setWrongSearchDescription] = useState(
     "In your search, minimal percentage of acohol must be lower than maximal."
   ); //description in modal if you set wrong search parameters
+
   useEffect(() => {
-    const fetchItems = async (url) => {
-      const data = await fetch(url).then((response) => response.json());
-      setItems(data);
-    };
+    dispatch(getBeersData());
+  }, []);
 
-    fetchItems(urlWithFilters());
-    dispatch(getBeersData())
+  useEffect(() => {
+    dispatch(getBeersData());
   }, [filters]);
-
-  const urlWithFilters = () => {
-    const url = new URL("https://api.punkapi.com");
-    url.pathname = "/v2/beers";
-
-    const filterPairs = Object.entries(filters).filter(
-      ([key, value]) => value !== null
-    );
-    const filterStrings = filterPairs.map(([key, value]) => `${key}=${value}`);
-    const filterQuery = filterStrings.join("&");
-
-    if (filterQuery) {
-      url.search = "?" + filterQuery;
-    }
-
-    return url.href;
-  };
 
   const handleFilters = (e) => {
     const { name } = e.target;
@@ -251,7 +221,13 @@ function Shop(props) {
       </div>
 
       <div
-        style={filters.page === 1 && !items.length ? { display: "none" } : {}}
+        style={
+          items
+            ? filters.page === 1 && !items.length
+              ? { display: "none" }
+              : {}
+            : { display: "none" }
+        }
       >
         <div className="d-flex justify-content-between">
           {/* Pagination and buttons - toggle View */}
@@ -305,7 +281,7 @@ function Shop(props) {
               </tr>
             </thead>
             <tbody>
-              {items.map((item) => (
+              {items?.map((item) => (
                 <tr key={item.id}>
                   <th scope="row">{item.id}</th>
                   <td>
@@ -317,7 +293,7 @@ function Shop(props) {
                   </td>
                   <td>
                     <Link
-                      to={`/shop/${item.name
+                      to={`/shop/${item?.name
                         .replace(/ /g, "-")
                         .replace(/\//g, "-")}`}
                       onClick={() => dispatch(actualItemId(item.id))}
@@ -334,7 +310,7 @@ function Shop(props) {
         <div style={showCards ? {} : { display: "none" }}>
           {/* Cards of Items */}
           <div className="row row-cols-1 row-cols-md-3 g-4 mb-3">
-            {items.length &&
+            {items?.length &&
               items.map((item) => (
                 <div key={item.id} className="col">
                   <Link
@@ -370,7 +346,13 @@ function Shop(props) {
         />
       </div>
       <div
-        style={!items.length && filters.page === 1 ? {} : { display: "none" }}
+        style={
+          items
+            ? filters.page === 1 && !items.length
+              ? { display: "none" }
+              : {}
+            : { display: "none" }
+        }
       >
         {/* message when error */}
         <h3>No items to display. Check your filters above.</h3>

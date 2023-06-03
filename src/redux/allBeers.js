@@ -1,11 +1,9 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { store } from "./store";
 
 const initialState = {
-  beers: {
-    beersList: [],
-    reqStatus: "idle",
-  },
+  beersList: [],
+  reqStatus: "idle",
 };
 
 const urlWithFilters = () => {
@@ -32,7 +30,6 @@ export const getBeersData = createAsyncThunk(
     const url = urlWithFilters();
     const response = await fetch(url);
     const data = await response.json();
-    console.log('data', data);
     return data;
   }
 );
@@ -44,18 +41,17 @@ const beersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getBeersData.pending, (state) => {
-        state.beers.reqStatus = "pending";
+        state.reqStatus = "pending";
       })
       .addCase(getBeersData.rejected, (state) => {
-        state.beers.reqStatus = "rejected";
+        state.reqStatus = "rejected";
       })
       .addCase(getBeersData.fulfilled, (state, { payload }) => {
-        state.beers.beersList = payload;
-        state.beers.reqStatus = "fulfilled";
+        state.beersList = payload;
+        state.reqStatus = "fulfilled";
       });
   },
 });
-
 
 const { reducer } = beersSlice;
 
