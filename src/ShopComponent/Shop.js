@@ -13,11 +13,9 @@ import {
   changeFilterFood,
   resetFilters,
 } from "../redux/filters";
-// import { getBeersData } from "../redux/allBeers"; //error tualItem.js:16 Uncaught ReferenceError: Cannot access '__WEBPACK_DEFAULT_EXPORT__' before initialization at Module.default
-//To fix this issue, you should check your code and make sure that you are initializing and declaring all variables and functions before you try to access them. You should also check that you are using the correct syntax and that your code is free of any typos or errors.
-// musi sięnajpierw wszystko załądować a potem pierwszy fetch.
 import { resetAbvRangeTrue } from "../redux/resetAbvRange";
 import { actualItemId } from "../redux/actualItem";
+import { getBeersData } from "../redux/allBeers";
 
 const defaultFilters = {
   page: 1,
@@ -44,7 +42,6 @@ function Shop(props) {
   const [wrongSearchDescription, setWrongSearchDescription] = useState(
     "In your search, minimal percentage of acohol must be lower than maximal."
   ); //description in modal if you set wrong search parameters
-
   useEffect(() => {
     const fetchItems = async (url) => {
       const data = await fetch(url).then((response) => response.json());
@@ -52,7 +49,7 @@ function Shop(props) {
     };
 
     fetchItems(urlWithFilters());
-    //getBeersData(); // trying to replace
+    dispatch(getBeersData())
   }, [filters]);
 
   const urlWithFilters = () => {

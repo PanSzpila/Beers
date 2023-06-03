@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import { store } from "./store";
 
 const initialState = {
@@ -32,7 +32,7 @@ export const getBeersData = createAsyncThunk(
     const url = urlWithFilters();
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
+    console.log('data', data);
     return data;
   }
 );
@@ -56,8 +56,7 @@ const beersSlice = createSlice({
   },
 });
 
+
 const { reducer } = beersSlice;
 
 export default reducer;
-
-//export default beersSlice.reducer;
