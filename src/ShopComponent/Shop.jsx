@@ -41,7 +41,6 @@ function Shop(props) {
         }
       >
         <div className="d-flex justify-content-between">
-          {/* Pagination and buttons - toggle View */}
           <div className="col-auto">
             <Pagination maxPages={maxPages} />
           </div>
