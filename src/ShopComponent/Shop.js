@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Modal } from "bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import BeerSearch from "./BeerSearch";
 import Pagination from "../Pagination";
 import ToggleView from "./ToggleView";
-import { resetAbvRangeTrue } from "../redux/resetAbvRange";
+import TableOfItems from "./TableOfItems";
 import { actualItemId } from "../redux/actualItem";
 import { getBeersData } from "../redux/allBeers";
 
@@ -51,40 +50,7 @@ function Shop(props) {
           />
         </div>
         <div style={showCards ? { display: "none" } : {}}>
-          {/* Table of Items */}
-          <table className="table table-dark table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col"></th>
-                <th scope="col">item name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items?.map((item) => (
-                <tr key={item.id}>
-                  <th scope="row">{item.id}</th>
-                  <td>
-                    <img
-                      src={item.image_url}
-                      alt="beer mini image"
-                      height="50"
-                    />
-                  </td>
-                  <td>
-                    <Link
-                      to={`/shop/${item?.name
-                        .replace(/ /g, "-")
-                        .replace(/\//g, "-")}`}
-                      onClick={() => dispatch(actualItemId(item.id))}
-                    >
-                      {item.name}
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <TableOfItems />
         </div>
 
         <div style={showCards ? {} : { display: "none" }}>
