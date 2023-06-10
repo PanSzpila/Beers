@@ -18,8 +18,6 @@ function ItemDetail(props) {
     fetchItem(id);
   }, []);
 
-  console.log(item);
-
   const renderTooltipIBU = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       International Bitterness Units scale. A gauge of beer's bitterness. What

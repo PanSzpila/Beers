@@ -1,7 +1,25 @@
-import React from "react";
+import { useState } from "react";
+import MultiRange from "./MultiRange";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeFilterPer_page,
+  changeFilterAbv_gt,
+  changeFilterAbv_lt,
+  changeFilterBeer_name,
+  changeFilterBrewed_before,
+  changeFilterBrewed_after,
+  changeFilterMalt,
+  changeFilterFood,
+  resetFilters,
+} from "../redux/filters";
 
 const BeerSearch = () => {
-  
+  const { filters } = useSelector((state) => state);
+  const maxAbv = 15; //here You can set maximal alcohol percent ratio available in items search filters and range input
+  const [brewed_beforeDate, setBrewed_beforeDate] = useState(new Date()); //similar to filters.brewed_before, but here is date format, and filters.brewed_before is in api-friendly string
+  const [brewed_afterDate, setBrewed_afterDate] = useState(); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
+  const dispatch = useDispatch();
+
   const handleFilters = (e) => {
     const { name } = e.target;
     let { value } = e.target;
@@ -28,7 +46,7 @@ const BeerSearch = () => {
       }
     }
 
-/*     function createFiltersDispatches(filters) {
+    /*     function createFiltersDispatches(filters) {
       const filtersDispatches = {};
       for (const [key, value] of Object.entries(filters)) {
         filtersDispatches[key] = dispatch(
@@ -39,7 +57,6 @@ const BeerSearch = () => {
     } */
 
     const filtersDispatches = {
-      page: dispatch(changeFilterPage(value)),
       per_page: dispatch(changeFilterPer_page(value)),
       abv_gt: dispatch(changeFilterAbv_gt(value)),
       abv_lt: dispatch(changeFilterAbv_lt(value)),
@@ -52,7 +69,8 @@ const BeerSearch = () => {
 
     const makeDispatch = Object.entries(filtersDispatches).filter(
       ([key, value]) => key === name
-    );
+    )[0][1];
+    console.log("makeDispatch", makeDispatch);
 
     return makeDispatch
       ? makeDispatch
