@@ -5,6 +5,7 @@ import BeerSearch from "./BeerSearch";
 import Pagination from "../Pagination";
 import ToggleView from "./ToggleView";
 import TableOfItems from "./TableOfItems";
+import CardsOfItems from "./CardsOfItems";
 import { actualItemId } from "../redux/actualItem";
 import { getBeersData } from "../redux/allBeers";
 
@@ -55,37 +56,7 @@ function Shop(props) {
 
         <div style={showCards ? {} : { display: "none" }}>
           {/* Cards of Items */}
-          <div className="row row-cols-1 row-cols-md-3 g-4 mb-3">
-            {items?.length &&
-              items.map((item) => (
-                <div key={item.id} className="col">
-                  <Link
-                    to={`/shop/${item.name
-                      .replace(/ /g, "-")
-                      .replace(/\//g, "-")}`}
-                    onClick={() => dispatch(actualItemId(item.id))}
-                  >
-                    <div className="card">
-                      <img
-                        src={item.image_url}
-                        className="card-img-top"
-                        alt="beer mini image"
-                        height="50"
-                        width="25"
-                      />
-                      <div className="card-body">
-                        <h5 className="card-title crop-text-2">
-                          {item.id}. {item.name}
-                        </h5>
-                        <p className="card-text crop-text-4">
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              ))}
-          </div>
+          <CardsOfItems />
         </div>
         <Pagination // Pagination
           maxPages={maxPages}
