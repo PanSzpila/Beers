@@ -4,7 +4,7 @@ import { Nav, Navbar, Container } from "react-bootstrap";
 function Nav2() {
   return (
     <div>
-      <Navbar bg="dark" expand="lg">
+      <Navbar variant="dark" bg="dark" expand="lg">
         <Container>
           <Navbar.Brand href="#">PiFko.pl</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
