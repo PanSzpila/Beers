@@ -1,4 +1,4 @@
-import reducer, { actualItemId } from "../redux/actualItem";
+import reducer, { actualItemId } from "../src/redux/actualItem";
 
 test("should return the initial state", () => {
   expect(reducer(undefined, {})).toEqual({ id: null });

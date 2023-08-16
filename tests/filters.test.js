@@ -11,7 +11,7 @@ import reducer, {
   changeFilterMalt,
   changeFilterFood,
   resetFilters,
-} from "../redux/filters";
+} from "../src/redux/filters";
 
 const initialState = {
   page: 1,

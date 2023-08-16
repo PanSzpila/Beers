@@ -1,7 +1,6 @@
 import React from "react";
 //import { render as rtlRender, screen } from "@testing-library/React";
 import Shop from "../ShopComponent/Shop";
-import { sum } from "../ShopComponent/Shop";
 import "@testing-library/jest-dom/extend-expect";
 import { render } from "./test-utils";
 

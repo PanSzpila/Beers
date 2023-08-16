@@ -2,7 +2,7 @@ import React from "react";
 import { render as rtlRender0 } from "@testing-library/react";
 import { render as rdRender0 } from "react-dom";
 import { Provider } from "react-redux";
-import { store } from "../redux/store";
+import { store } from "../src/redux/store";
 
 function rtlRender(ui) {
   function Wrapper({ children }) {

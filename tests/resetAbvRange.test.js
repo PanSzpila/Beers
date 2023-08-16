@@ -2,7 +2,7 @@ import reducer, {
   resetAbvRangeTrue,
   resetAbvRangeFalse,
   resetAbvRange,
-} from "../redux/resetAbvRange";
+} from "../src/redux/resetAbvRange";
 
 it("should return the initial state", () => {
   expect(reducer(undefined, {})).toEqual({ reset: false });
