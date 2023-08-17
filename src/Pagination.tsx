@@ -7,6 +7,9 @@ import {
 } from "./redux/filters";
 
 const Pagination = (props) => {
+
+
+  // @ts-expect-error TS(2339): Property 'filters' does not exist on type 'Default... Remove this comment to see the full error message
   const page = useSelector((state) => state.filters.page);
   const dispatch = useDispatch();
 

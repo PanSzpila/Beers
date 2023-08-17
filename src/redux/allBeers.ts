@@ -34,6 +34,9 @@ export const getBeersData = createAsyncThunk(
   }
 );
 
+
+
+// @ts-expect-error TS(2345): Argument of type '{ name: "beers"; initialState: {... Remove this comment to see the full error message
 const beersSlice = createSlice({
   name: "beers",
   initialState,
