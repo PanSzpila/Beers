@@ -10,11 +10,8 @@ import { actualItemId } from "../redux/actualItem";
 import { getBeersData } from "../redux/allBeers";
 
 function Shop(props) {
-
-
   // @ts-expect-error TS(2339): Property 'filters' does not exist on type 'Default... Remove this comment to see the full error message
   const { filters } = useSelector((state) => state);
-
 
   // @ts-expect-error TS(2339): Property 'allBeers' does not exist on type 'Defaul... Remove this comment to see the full error message
   const items = useSelector((state) => state.allBeers.beersList);
@@ -82,11 +79,7 @@ function Shop(props) {
 
       <div
         className="modal fade text-dark"
-        id="WrongSearch"
-
-
-        // @ts-expect-error TS(2322): Type 'string' is not assignable to type 'number'.
-        tabIndex="-1"
+        tabIndex={-1}
         aria-labelledby="WrongSearchLabel"
         aria-hidden="true"
       >

@@ -1,8 +1,9 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { actualItemId } from "../redux/actualItem";
 
 const CardsOfItems = () => {
-
+  const dispatch = useDispatch();
 
   // @ts-expect-error TS(2339): Property 'allBeers' does not exist on type 'Defaul... Remove this comment to see the full error message
   const items = useSelector((state) => state.allBeers.beersList);
@@ -14,9 +15,6 @@ const CardsOfItems = () => {
           <div key={item.id} className="col">
             <Link
               to={`/shop/${item.name.replace(/ /g, "-").replace(/\//g, "-")}`}
-
-
-              // @ts-expect-error TS(2304): Cannot find name 'dispatch'.
               onClick={() => dispatch(actualItemId(item.id))}
             >
               <div className="card">

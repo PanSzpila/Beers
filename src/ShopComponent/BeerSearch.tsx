@@ -12,10 +12,9 @@ import {
   changeFilterFood,
   resetFilters,
 } from "../redux/filters";
+import { resetAbvRangeTrue } from "../redux/resetAbvRange";
 
 const BeerSearch = () => {
-
-
   // @ts-expect-error TS(2339): Property 'filters' does not exist on type 'Default... Remove this comment to see the full error message
   const { filters } = useSelector((state) => state);
   const maxAbv = 15; //here You can set maximal alcohol percent ratio available in items search filters and range input
@@ -33,25 +32,18 @@ const BeerSearch = () => {
       const date = new Date(value);
       name === "brewed_before"
         ? setBrewed_beforeDate(date)
-
-
-        // @ts-expect-error TS(2345): Argument of type 'Date' is not assignable to param... Remove this comment to see the full error message
-        : setBrewed_afterDate(date);
+        : // @ts-expect-error TS(2345): Argument of type 'Date' is not assignable to param... Remove this comment to see the full error message
+          setBrewed_afterDate(date);
       value =
         ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
       if (
         brewed_beforeDate &&
         brewed_afterDate &&
-
-
         // @ts-expect-error TS(2339): Property 'getTime' does not exist on type 'never'.
         brewed_beforeDate.getTime() > brewed_afterDate.getTime()
       ) {
-
-
         // @ts-expect-error TS(2304): Cannot find name 'Modal'.
         let WrongSearch = new Modal(document.getElementById("WrongSearch"));
-
 
         // @ts-expect-error TS(2304): Cannot find name 'setWrongSearchDescription'.
         setWrongSearchDescription(
@@ -118,10 +110,6 @@ const BeerSearch = () => {
           <select
             className="form-select form-floating"
             value={filters.per_page}
-
-
-            // @ts-expect-error TS(2322): Type '{ children: Element[]; className: string; va... Remove this comment to see the full error message
-            type="text"
             onChange={handleFilters}
             name="per_page"
             id="per_page"
@@ -211,9 +199,6 @@ const BeerSearch = () => {
             value="reset filters"
             onClick={() => {
               dispatch(resetFilters());
-
-
-              // @ts-expect-error TS(2304): Cannot find name 'resetAbvRangeTrue'.
               dispatch(resetAbvRangeTrue());
             }}
           ></input>

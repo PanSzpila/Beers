@@ -18,9 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-
-            {/* // @ts-expect-error TS(2322): Type '{ path: string; exact: true; element: Elemen... Remove this comment to see the full error message */}
-            <Route path="/shop" exact element={<Shop apiUrl={apiUrl} />} />
+            <Route path="/shop" element={<Shop apiUrl={apiUrl} />} />
             <Route
               path="/shop/:name"
               element={<ItemDetail apiUrl={apiUrl} />}
