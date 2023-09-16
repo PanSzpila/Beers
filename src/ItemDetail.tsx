@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAppSelector } from "./hooks";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { apiUrl } from "./App";
 
 function ItemDetail() {
   const { id } = useAppSelector((state) => state.actualItem);
@@ -30,8 +29,8 @@ function ItemDetail() {
   });
 
   useEffect(() => {
-    const fetchItem = async (id) => {
-      let fetchedItem = await fetch(`${apiUrl}/${id}`).then((response) =>
+    const fetchItem = async (id: any) => {
+      let fetchedItem = await fetch(`${process.env.REACT_APP_API_URL}/${id}`).then((response) =>
         response.json()
       );
       fetchedItem = fetchedItem[0];
@@ -41,18 +40,18 @@ function ItemDetail() {
     fetchItem(id);
   }, []);
 
-  const renderTooltipIBU = (props) => (
+  const renderTooltipIBU = (props: any) => (
     <Tooltip id="button-tooltip" {...props}>
       International Bitterness Units scale. A gauge of beer's bitterness. What
       IBUs measure are the parts per million of isohumulone found in a beer.
     </Tooltip>
   );
-  const renderTooltipSRM = (props) => (
+  const renderTooltipSRM = (props: any) => (
     <Tooltip id="button-tooltip" {...props}>
       Beer Color The Standard Reference Method.
     </Tooltip>
   );
-  const renderTooltipAttenuation = (props) => (
+  const renderTooltipAttenuation = (props: any) => (
     <Tooltip id="button-tooltip" {...props}>
       In brewing, attenuation refers to the conversion of sugars into alcohol
       and carbon dioxide by the fermentation process; the greater the
@@ -92,7 +91,7 @@ function ItemDetail() {
                   Malt:
                   <ul>
                     {item &&
-                      item.ingredients.malt.map((malt, index) => (
+                      item.ingredients.malt.map((malt: any, index) => (
                         <li
                           key={index}
                         >{`${malt.name} - ${malt.amount.value} ${malt.amount.unit}`}</li>
@@ -103,7 +102,7 @@ function ItemDetail() {
                   Hops:
                   <ul>
                     {item &&
-                      item.ingredients.hops.map((hop, index) => (
+                      item.ingredients.hops.map((hop: any, index) => (
                         <li
                           key={index}
                         >{`${hop.name} - ${hop.amount.value} ${hop.amount.unit}`}</li>

@@ -2,7 +2,7 @@ import { useAppSelector, useAppDispatch } from "../hooks";
 import { Link } from "react-router-dom";
 import { actualItemId } from "../redux/actualItem";
 
-const TableOfItems = (props) => {
+const TableOfItems = (props: any) => {
   const dispatch = useAppDispatch();
 
   const items = useAppSelector((state) => state.allBeers.beersList);
@@ -17,7 +17,7 @@ const TableOfItems = (props) => {
         </tr>
       </thead>
       <tbody>
-        {items?.map((item) => (
+        {items?.map((item: any) => (
           <tr key={item.id}>
             <th scope="row">{item.id}</th>
             <td>

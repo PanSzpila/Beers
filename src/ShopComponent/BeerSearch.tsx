@@ -22,7 +22,7 @@ const BeerSearch = () => {
   const [brewed_afterDate, setBrewed_afterDate] = useState(new Date()); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
   const dispatch = useAppDispatch();
 
-  const handleFilters = (e) => {
+  const handleFilters = (e: any) => {
     const { name } = e.target;
     let { value } = e.target;
     if (value == "null" || value == "undefined") {

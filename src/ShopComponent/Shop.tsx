@@ -46,7 +46,7 @@ function Shop() {
           </div>
           <ToggleView
             showCards={showCards}
-            setShowCardsToParent={(showCards) => setShowCards(showCards)}
+            setShowCardsToParent={(showCards: any) => setShowCards(showCards)}
           />
         </div>
         <div style={showCards ? { display: "none" } : {}}>

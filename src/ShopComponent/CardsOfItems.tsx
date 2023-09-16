@@ -10,7 +10,7 @@ const CardsOfItems = () => {
   return (
     <div className="row row-cols-1 row-cols-md-3 g-4 mb-3">
       {items?.length &&
-        items.map((item) => (
+        items.map((item: any) => (
           <div key={item.id} className="col">
             <Link
               to={`/shop/${item.name.replace(/ /g, "-").replace(/\//g, "-")}`}

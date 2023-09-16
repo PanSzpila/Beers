@@ -1,4 +1,4 @@
-const ToggleView = (props) => {
+const ToggleView = (props: any) => {
   return (
     <div className="col-auto">
       {/* buttons - toggle View */}

@@ -26,13 +26,13 @@ function MultiRange(props: {
   const dispatch = useAppDispatch();
   const [minValue, set_minValue] = useState(props.minValue);
   const [maxValue, set_maxValue] = useState(props.maxValue);
-  const handleInput = (e) => {
+  const handleInput = (e: any) => {
     set_minValue(e.minValue);
     set_maxValue(e.maxValue);
   };
 
   useEffect(() => {
-    const output = (minValue, maxValue) => {
+    const output = (minValue: any, maxValue: any) => {
       dispatch(changeFilterAbv_gt(minValue));
       dispatch(changeFilterAbv_lt(maxValue));
       dispatch(changeFilterPage(1));
@@ -63,7 +63,7 @@ function MultiRange(props: {
       preventWheel={props.preventWheel ? props.preventWheel : false}
       minValue={minValue}
       maxValue={maxValue}
-      onInput={(e) => {
+      onInput={(e: any) => {
         handleInput(e);
       }}
     />

@@ -1,19 +1,24 @@
 import React from "react";
 import { Nav, Navbar, Container } from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 function Nav2() {
   return (
     <div>
       <Navbar variant="dark" bg="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="#">PiFko.pl</Navbar.Brand>
+          <Link to="/">PiFko.pl</Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="#">Home</Nav.Link>
-              <Nav.Link href="#about">About</Nav.Link>
-              <Nav.Link href="#shop">Shop</Nav.Link>
-            </Nav>
+              <div style={{
+                  display: "flex",
+                  gap: "10px"
+              }}>
+                                <Link to="/">Home</Link>
+              <Link to="/about">About</Link>
+              <Link to="/Shop">Shop</Link>
+              </div>
+
           </Navbar.Collapse>
         </Container>
       </Navbar>
