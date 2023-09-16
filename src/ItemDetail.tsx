@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "./hooks";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { apiUrl } from "./App";
 
-function ItemDetail(props) {
-  // @ts-expect-error TS(2339): Property 'actualItem' does not exist on type 'Defa... Remove this comment to see the full error message
-  const { id } = useSelector((state) => state.actualItem);
+function ItemDetail() {
+  const { id } = useAppSelector((state) => state.actualItem);
   const [item, setItem] = useState({
     abv: 0,
     attenuation_level: 0,
@@ -31,7 +31,7 @@ function ItemDetail(props) {
 
   useEffect(() => {
     const fetchItem = async (id) => {
-      let fetchedItem = await fetch(`${props.apiUrl}/${id}`).then((response) =>
+      let fetchedItem = await fetch(`${apiUrl}/${id}`).then((response) =>
         response.json()
       );
       fetchedItem = fetchedItem[0];

@@ -1,5 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "./store";
 import { store } from "./store";
+
+interface AllBeersState {
+  //@TODO more strict types
+  beersList: Array<object>;
+  reqStatus: "idle";
+}
 
 const initialState = {
   beersList: [],
@@ -34,13 +42,10 @@ export const getBeersData = createAsyncThunk(
   }
 );
 
-
-
-// @ts-expect-error TS(2345): Argument of type '{ name: "beers"; initialState: {... Remove this comment to see the full error message
 const beersSlice = createSlice({
   name: "beers",
   initialState,
-
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getBeersData.pending, (state) => {
