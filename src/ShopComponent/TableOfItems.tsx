@@ -1,11 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks";
 import { Link } from "react-router-dom";
+import { actualItemId } from "../redux/actualItem";
 
 const TableOfItems = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // @ts-expect-error TS(2339): Property 'allBeers' does not exist on type 'Defaul... Remove this comment to see the full error message
-  const items = useSelector((state) => state.allBeers.beersList);
+  const items = useAppSelector((state) => state.allBeers.beersList);
 
   return (
     <table className="table table-dark table-striped">
@@ -28,7 +28,6 @@ const TableOfItems = (props) => {
                 to={`/shop/${item?.name
                   .replace(/ /g, "-")
                   .replace(/\//g, "-")}`}
-                // @ts-expect-error TS(2304): Cannot find name 'dispatch'.
                 onClick={() => dispatch(actualItemId(item.id))}
               >
                 {item.name}

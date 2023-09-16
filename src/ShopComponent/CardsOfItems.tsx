@@ -1,12 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks";
 import { Link } from "react-router-dom";
 import { actualItemId } from "../redux/actualItem";
 
 const CardsOfItems = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  // @ts-expect-error TS(2339): Property 'allBeers' does not exist on type 'Defaul... Remove this comment to see the full error message
-  const items = useSelector((state) => state.allBeers.beersList);
+  const items = useAppSelector((state) => state.allBeers.beersList);
 
   return (
     <div className="row row-cols-1 row-cols-md-3 g-4 mb-3">

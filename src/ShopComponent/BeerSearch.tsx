@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MultiRange from "./MultiRange";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks";
 import {
   changeFilterPer_page,
   changeFilterAbv_gt,
@@ -13,14 +13,14 @@ import {
   resetFilters,
 } from "../redux/filters";
 import { resetAbvRangeTrue } from "../redux/resetAbvRange";
+import { Modal } from "react-bootstrap";
 
 const BeerSearch = () => {
-  // @ts-expect-error TS(2339): Property 'filters' does not exist on type 'Default... Remove this comment to see the full error message
-  const { filters } = useSelector((state) => state);
+  const { filters } = useAppSelector((state) => state);
   const maxAbv = 15; //here You can set maximal alcohol percent ratio available in items search filters and range input
   const [brewed_beforeDate, setBrewed_beforeDate] = useState(new Date()); //similar to filters.brewed_before, but here is date format, and filters.brewed_before is in api-friendly string
-  const [brewed_afterDate, setBrewed_afterDate] = useState(); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
-  const dispatch = useDispatch();
+  const [brewed_afterDate, setBrewed_afterDate] = useState(new Date()); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
+  const dispatch = useAppDispatch();
 
   const handleFilters = (e) => {
     const { name } = e.target;
@@ -32,14 +32,12 @@ const BeerSearch = () => {
       const date = new Date(value);
       name === "brewed_before"
         ? setBrewed_beforeDate(date)
-        : // @ts-expect-error TS(2345): Argument of type 'Date' is not assignable to param... Remove this comment to see the full error message
-          setBrewed_afterDate(date);
+        : setBrewed_afterDate(date);
       value =
         ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear();
       if (
         brewed_beforeDate &&
         brewed_afterDate &&
-        // @ts-expect-error TS(2339): Property 'getTime' does not exist on type 'never'.
         brewed_beforeDate.getTime() > brewed_afterDate.getTime()
       ) {
         // @ts-expect-error TS(2304): Cannot find name 'Modal'.

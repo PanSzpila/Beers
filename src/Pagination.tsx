@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "./hooks";
 import {
   changeFilterPage,
   changeFilterPageIncrement,
@@ -7,11 +7,8 @@ import {
 } from "./redux/filters";
 
 const Pagination = (props) => {
-
-
-  // @ts-expect-error TS(2339): Property 'filters' does not exist on type 'Default... Remove this comment to see the full error message
-  const page = useSelector((state) => state.filters.page);
-  const dispatch = useDispatch();
+  const page = useAppSelector((state) => state.filters.page);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="pagination-nav">

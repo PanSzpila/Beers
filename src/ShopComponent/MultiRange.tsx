@@ -1,7 +1,7 @@
 /*  https://github.com/developergovindgupta/multi-range-slider-react */
 
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks";
 import MultiRangeSlider from "multi-range-slider-react";
 import { resetAbvRangeFalse } from "../redux/resetAbvRange";
 import {
@@ -10,16 +10,20 @@ import {
   changeFilterPage,
 } from "../redux/filters";
 
-function MultiRange(props) {
+function MultiRange(props: {
+  min: number;
+  max: number;
+  minValue: number;
+  maxValue: number;
+  step: number;
+  ruler: boolean;
+  label: boolean;
+  preventWheel?: boolean;
+}) {
+  const filters = useAppSelector((state) => state.filters);
 
-
-  // @ts-expect-error TS(2339): Property 'filters' does not exist on type 'Default... Remove this comment to see the full error message
-  const filters = useSelector((state) => state.filters);
-
-
-  // @ts-expect-error TS(2339): Property 'resetAbvRange' does not exist on type 'D... Remove this comment to see the full error message
-  const reset = useSelector((state) => state.resetAbvRange.reset);
-  const dispatch = useDispatch();
+  const reset = useAppSelector((state) => state.resetAbvRange.reset);
+  const dispatch = useAppDispatch();
   const [minValue, set_minValue] = useState(props.minValue);
   const [maxValue, set_maxValue] = useState(props.maxValue);
   const handleInput = (e) => {

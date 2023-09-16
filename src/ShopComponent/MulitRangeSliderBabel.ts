@@ -1,6 +1,6 @@
 // This file is not in use. Its for info, how multi range slider component is built
 
-class DoubleRangeSlider extends React.Component {
+/* class DoubleRangeSlider extends React.Component {
   maxValue: any;
   minValue: any;
   onMouseUp: any;
@@ -191,183 +191,55 @@ class DoubleRangeSlider extends React.Component {
     return (
 
 
-      // @ts-expect-error TS(2304): Cannot find name 'div'.
       <div className="card">
-
-
-        // @ts-expect-error TS(2304): Cannot find name 'h2'.
         <h2>Double range slider</h2>
-
-
-        // @ts-expect-error TS(2304): Cannot find name 'div'.
         <div className="current-value">
-
-
-          // @ts-expect-error TS(2304): Cannot find name 'label'.
           <label htmlFor="min-input">Min: </label>
-
-
-          // @ts-expect-error TS(2304): Cannot find name 'input'.
           <input
-
-
-            // @ts-expect-error TS(2663): Cannot find name 'id'. Did you mean the instance m... Remove this comment to see the full error message
             id="min-input"
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'type'.
             type="number"
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'onChange'.
             onChange={this.setMin}
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'value'.
             value={inputMin}
-
-
-            // @ts-expect-error TS(2588): Cannot assign to 'min' because it is a constant.
             min={min}
-
-
-            // @ts-expect-error TS(2588): Cannot assign to 'max' because it is a constant.
             max={this.maxForMin}
           />
-
-
-
-          // @ts-expect-error TS(2304): Cannot find name 'br'.
           <br />
-
-
-          // @ts-expect-error TS(2304): Cannot find name 'label'.
           <label htmlFor="max-input">Max: </label>
-
-
-          // @ts-expect-error TS(2304): Cannot find name 'input'.
           <input
-
-
-            // @ts-expect-error TS(2663): Cannot find name 'id'. Did you mean the instance m... Remove this comment to see the full error message
             id="max-input"
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'type'.
             type="number"
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'onChange'.
             onChange={this.setMax}
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'value'.
             value={inputMax}
-
-
-            // @ts-expect-error TS(2588): Cannot assign to 'min' because it is a constant.
             min={this.minForMax}
-
-
-            // @ts-expect-error TS(2588): Cannot assign to 'max' because it is a constant.
             max={max}
           />
         </div>
-
-
-
-        // @ts-expect-error TS(2304): Cannot find name 'div'.
         <div className="values">
-
-
-          // @ts-expect-error TS(2304): Cannot find name 'div'.
           <div>{min}</div>
-
-
-          // @ts-expect-error TS(2304): Cannot find name 'div'.
           <div>{max}</div>
         </div>
-
-
-
-        // @ts-expect-error TS(2304): Cannot find name 'div'.
         <div ref={(ref) => (this.slider = ref)} id="slider">
-
-
-          // @ts-expect-error TS(2304): Cannot find name 'div'.
           <div
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'ref'.
             ref={(ref) => (this.minValue = ref)}
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'id'.
             id="min"
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'data'.
             data-content={currentMin}
           >
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'div'.
             <div
-
-
-              // @ts-expect-error TS(2304): Cannot find name 'ref'.
               ref={(ref) => (this.minValueDrag = ref)}
-
-
-              // @ts-expect-error TS(2304): Cannot find name 'id'.
               id="min-drag"
-
-
-              // @ts-expect-error TS(2304): Cannot find name 'onMouseDown'.
               onMouseDown={this.changeMinValue}
-
-
-              // @ts-expect-error TS(2304): Cannot find name 'onTouchStart'.
               onTouchStart={this.changeMinValue}
             ></div>
           </div>
-
-
-
-          // @ts-expect-error TS(2304): Cannot find name 'div'.
           <div
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'ref'.
             ref={(ref) => (this.maxValue = ref)}
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'id'.
             id="max"
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'data'.
             data-content={currentMax}
           >
-
-
-            // @ts-expect-error TS(2304): Cannot find name 'div'.
             <div
-
-
-              // @ts-expect-error TS(2304): Cannot find name 'ref'.
               ref={(ref) => (this.maxValueDrag = ref)}
-
-
-              // @ts-expect-error TS(2304): Cannot find name 'id'.
               id="max-drag"
-
-
-              // @ts-expect-error TS(2304): Cannot find name 'onMouseDown'.
               onMouseDown={this.changeMaxValue}
-
-
-              // @ts-expect-error TS(2304): Cannot find name 'onTouchStart'.
               onTouchStart={this.changeMaxValue}
             ></div>
           </div>
@@ -376,8 +248,5 @@ class DoubleRangeSlider extends React.Component {
     );
   }
 }
-
-
-
-// @ts-expect-error TS(2352): Conversion of type 'RegExp' to type 'DoubleRangeSl... Remove this comment to see the full error message
 ReactDOM.render(<DoubleRangeSlider />, document.getElementById("root"));
+ */

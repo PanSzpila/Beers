@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-// @ts-expect-error TS(2307): Cannot find module './images/Two beer skeleton.jpg... Remove this comment to see the full error message
 import Skeleton from "./images/Two beer skeleton.jpg";
 
 const Home = () => {

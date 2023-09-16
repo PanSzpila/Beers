@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector, useAppDispatch } from "../hooks";
 import BeerSearch from "./BeerSearch";
 import Pagination from "../Pagination";
 import ToggleView from "./ToggleView";
@@ -9,13 +8,11 @@ import CardsOfItems from "./CardsOfItems";
 import { actualItemId } from "../redux/actualItem";
 import { getBeersData } from "../redux/allBeers";
 
-function Shop(props) {
-  // @ts-expect-error TS(2339): Property 'filters' does not exist on type 'Default... Remove this comment to see the full error message
-  const { filters } = useSelector((state) => state);
+function Shop() {
+  const { filters } = useAppSelector((state) => state);
 
-  // @ts-expect-error TS(2339): Property 'allBeers' does not exist on type 'Defaul... Remove this comment to see the full error message
-  const items = useSelector((state) => state.allBeers.beersList);
-  const dispatch = useDispatch();
+  const items = useAppSelector((state) => state.allBeers.beersList);
+  const dispatch = useAppDispatch();
 
   const maxPages = 13; //here You can set maximal number of pages in items list
   const [showCards, setShowCards] = useState(true); // options of display items: true - displays cards, false - displays table
