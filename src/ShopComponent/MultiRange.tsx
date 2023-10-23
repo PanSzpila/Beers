@@ -1,6 +1,6 @@
 /*  https://github.com/developergovindgupta/multi-range-slider-react */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import MultiRangeSlider from "multi-range-slider-react";
 import { resetAbvRangeFalse } from "../redux/resetAbvRange";
@@ -9,6 +9,8 @@ import {
   changeFilterAbv_lt,
   changeFilterPage,
 } from "../redux/filters";
+
+type sliderE = { max: number; maxValue: number; min: number; minValue: number };
 
 function MultiRange(props: {
   min: number;
@@ -26,13 +28,13 @@ function MultiRange(props: {
   const dispatch = useAppDispatch();
   const [minValue, set_minValue] = useState(props.minValue);
   const [maxValue, set_maxValue] = useState(props.maxValue);
-  const handleInput = (e: any) => {
+  const handleInput = (e: sliderE) => {
     set_minValue(e.minValue);
     set_maxValue(e.maxValue);
   };
 
   useEffect(() => {
-    const output = (minValue: any, maxValue: any) => {
+    const output = (minValue: number, maxValue: number) => {
       dispatch(changeFilterAbv_gt(minValue));
       dispatch(changeFilterAbv_lt(maxValue));
       dispatch(changeFilterPage(1));
@@ -63,7 +65,7 @@ function MultiRange(props: {
       preventWheel={props.preventWheel ? props.preventWheel : false}
       minValue={minValue}
       maxValue={maxValue}
-      onInput={(e: any) => {
+      onInput={(e: sliderE) => {
         handleInput(e);
       }}
     />

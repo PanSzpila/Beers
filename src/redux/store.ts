@@ -3,6 +3,7 @@ import filtersReducer from "./filters";
 import resetAbvRangeReducer from "./resetAbvRange";
 import actualItemReducer from "./actualItem";
 import allBeersReducer from "./allBeers";
+import modalReducer from "./modal";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     resetAbvRange: resetAbvRangeReducer,
     actualItem: actualItemReducer,
     allBeers: allBeersReducer,
+    modal: modalReducer,
   },
 });
 

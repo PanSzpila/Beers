@@ -1,4 +1,4 @@
-export const x =() =>{}
+export const x = () => {};
 
 // This file is not in use. Its for info, how multi range slider component is built
 
@@ -78,8 +78,6 @@ export const x =() =>{}
     const dragedWidht = e.clientX - offsetSliderWidht;
     const dragedWidhtInPercent = (dragedWidht * 100) / sliderWidth;
 
-
-    // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     const currentMin = Math.abs(parseInt((max * dragedWidhtInPercent) / 100));
 
     console.log(e.pageX, e.clientX, offsetSliderWidht);
@@ -145,8 +143,6 @@ export const x =() =>{}
     const dragedWidht = e.clientX - offsetSliderWidht;
     const dragedWidhtInPercent = (dragedWidht * 100) / sliderWidth;
 
-
-    // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     const currentMax = Math.abs(parseInt((max * dragedWidhtInPercent) / 100));
 
     if (currentMax >= currentMin + minValueBetween && currentMax <= max) {

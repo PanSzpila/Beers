@@ -1,4 +1,7 @@
-const ToggleView = (props: any) => {
+const ToggleView = (props: {
+  showCards: boolean;
+  setShowCardsToParent: (arg0: boolean) => void;
+}) => {
   return (
     <div className="col-auto">
       {/* buttons - toggle View */}

@@ -5,20 +5,19 @@ import Pagination from "../Pagination";
 import ToggleView from "./ToggleView";
 import TableOfItems from "./TableOfItems";
 import CardsOfItems from "./CardsOfItems";
-import { actualItemId } from "../redux/actualItem";
 import { getBeersData } from "../redux/allBeers";
+import { Modal, Button } from "react-bootstrap";
+import { hideModal } from "../redux/modal";
 
 function Shop() {
   const { filters } = useAppSelector((state) => state);
+  const { modal } = useAppSelector((state) => state);
 
   const items = useAppSelector((state) => state.allBeers.beersList);
   const dispatch = useAppDispatch();
 
   const maxPages = 13; //here You can set maximal number of pages in items list
-  const [showCards, setShowCards] = useState(true); // options of display items: true - displays cards, false - displays table
-  const [wrongSearchDescription, setWrongSearchDescription] = useState(
-    "In your search, minimal percentage of acohol must be lower than maximal."
-  ); //description in modal if you set wrong search parameters
+  const [showCards, setShowCards] = useState<boolean>(true); // options of display items: true - displays cards, false - displays table
 
   useEffect(() => {
     dispatch(getBeersData());
@@ -46,7 +45,9 @@ function Shop() {
           </div>
           <ToggleView
             showCards={showCards}
-            setShowCardsToParent={(showCards: any) => setShowCards(showCards)}
+            setShowCardsToParent={(showCards: boolean) =>
+              setShowCards(showCards)
+            }
           />
         </div>
         <div style={showCards ? { display: "none" } : {}}>
@@ -73,8 +74,25 @@ function Shop() {
         {/* message when error */}
         <h3>No items to display. Check your filters above.</h3>
       </div>
+      {/* @TODO Modal dark theme, or maybe switch themes of all app */}
+      <Modal
+        show={modal.show}
+        onHide={() => dispatch(hideModal())}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Wrong search filters parameters</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{modal.description}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => dispatch(hideModal())}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
-      <div
+      {/*       <div
         className="modal fade text-dark"
         tabIndex={-1}
         aria-labelledby="WrongSearchLabel"
@@ -94,7 +112,7 @@ function Shop() {
               ></button>
             </div>
             <div className="modal-body" id="WrongSearchDescription">
-              {wrongSearchDescription}
+              {modal.description}
             </div>
             <div className="modal-footer">
               <button
@@ -107,7 +125,7 @@ function Shop() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

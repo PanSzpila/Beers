@@ -6,7 +6,7 @@ import {
   changeFilterPageDecrement,
 } from "./redux/filters";
 
-const Pagination = (props: any) => {
+const Pagination = (props: { maxPages: number }) => {
   const page = useAppSelector((state) => state.filters.page);
   const dispatch = useAppDispatch();
 

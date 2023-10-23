@@ -1,10 +1,60 @@
 import { useState, useEffect } from "react";
-import { useAppSelector } from "./hooks";
+import { useAppSelector } from "../hooks";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+
+type Param = {
+  value: number;
+  unit: string;
+};
+
+type Malt = {
+  name: string;
+  amount: Param;
+};
+
+type Hop = Malt & {
+  add: string;
+  attribute: string;
+};
+
+type Mash_temp = {
+  temp: Param;
+  duration: number;
+};
+
+export type ItemDetails = {
+  abv: number;
+  attenuation_level: number;
+  boil_volume: Param;
+  brewers_tips: string;
+  contributed_by: string;
+  description: string;
+  ebc: number;
+  first_brewed: string;
+  food_pairing: Array<string>;
+  ibu: number;
+  id: number;
+  image_url: string;
+  ingredients: { malt: Array<Malt>; hops: Array<Hop>; yeast: string };
+  method: {
+    mash_temp: Array<Mash_temp>;
+    fermentation: {
+      temp: Param;
+    };
+    twist: null;
+  };
+  name: string;
+  ph: number;
+  srm: number;
+  tagline: string;
+  target_fg: number;
+  target_og: number;
+  volume: Param;
+};
 
 function ItemDetail() {
   const { id } = useAppSelector((state) => state.actualItem);
-  const [item, setItem] = useState({
+  const [item, setItem] = useState<ItemDetails>({
     abv: 0,
     attenuation_level: 0,
     boil_volume: { value: 0, unit: "" },
@@ -18,7 +68,16 @@ function ItemDetail() {
     id: 0,
     image_url: "",
     ingredients: { malt: [], hops: [], yeast: "" },
-    method: { mash_temp: [], fermentation: {}, twist: null },
+    method: {
+      mash_temp: [],
+      fermentation: {
+        temp: {
+          value: 0,
+          unit: "",
+        },
+      },
+      twist: null,
+    },
     name: "",
     ph: 0,
     srm: 0,
@@ -29,10 +88,10 @@ function ItemDetail() {
   });
 
   useEffect(() => {
-    const fetchItem = async (id: any) => {
-      let fetchedItem = await fetch(`${process.env.REACT_APP_API_URL}/${id}`).then((response) =>
-        response.json()
-      );
+    const fetchItem = async (id: number | null) => {
+      let fetchedItem = await fetch(
+        `${process.env.REACT_APP_API_URL}/${id}`
+      ).then((response) => response.json());
       fetchedItem = fetchedItem[0];
       setItem(fetchedItem);
     };
@@ -91,7 +150,7 @@ function ItemDetail() {
                   Malt:
                   <ul>
                     {item &&
-                      item.ingredients.malt.map((malt: any, index) => (
+                      item.ingredients.malt.map((malt: Malt, index) => (
                         <li
                           key={index}
                         >{`${malt.name} - ${malt.amount.value} ${malt.amount.unit}`}</li>
@@ -102,7 +161,7 @@ function ItemDetail() {
                   Hops:
                   <ul>
                     {item &&
-                      item.ingredients.hops.map((hop: any, index) => (
+                      item.ingredients.hops.map((hop: Hop, index) => (
                         <li
                           key={index}
                         >{`${hop.name} - ${hop.amount.value} ${hop.amount.unit}`}</li>

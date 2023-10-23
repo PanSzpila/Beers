@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import MultiRange from "./MultiRange";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import {
@@ -13,7 +13,7 @@ import {
   resetFilters,
 } from "../redux/filters";
 import { resetAbvRangeTrue } from "../redux/resetAbvRange";
-import { Modal } from "react-bootstrap";
+import { showModal, changeModalDescription } from "../redux/modal";
 
 const BeerSearch = () => {
   const { filters } = useAppSelector((state) => state);
@@ -22,12 +22,10 @@ const BeerSearch = () => {
   const [brewed_afterDate, setBrewed_afterDate] = useState(new Date()); //similar to filters.brewed_after, but here is date format, and filters.brewed_before is in api-friendly string
   const dispatch = useAppDispatch();
 
-  const handleFilters = (e: any) => {
+  const handleFilters = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e);
     const { name } = e.target;
     let { value } = e.target;
-    if (value == "null" || value == "undefined") {
-      value = null;
-    }
     if (name === "brewed_before" || name === "brewed_after") {
       const date = new Date(value);
       name === "brewed_before"
@@ -40,14 +38,12 @@ const BeerSearch = () => {
         brewed_afterDate &&
         brewed_beforeDate.getTime() > brewed_afterDate.getTime()
       ) {
-        // @ts-expect-error TS(2304): Cannot find name 'Modal'.
-        let WrongSearch = new Modal(document.getElementById("WrongSearch"));
-
-        // @ts-expect-error TS(2304): Cannot find name 'setWrongSearchDescription'.
-        setWrongSearchDescription(
-          'in your search, "brewed after" date must be earlier than "brewed before".'
+        dispatch(
+          changeModalDescription(
+            'in your search, "brewed after" date must be earlier than "brewed before".'
+          )
         );
-        WrongSearch.show();
+        dispatch(showModal());
       }
     }
 
@@ -61,10 +57,34 @@ const BeerSearch = () => {
       return filtersDispatches;
     } */
 
+    if (name === "per_page") {
+      return dispatch(changeFilterPer_page(parseInt(value)));
+    }
+    if (name === "beer_name") {
+      return dispatch(changeFilterBeer_name(value));
+    }
+    if (name === "brewed_before") {
+      return dispatch(changeFilterBrewed_before(value));
+    }
+    if (name === "brewed_after") {
+      return dispatch(changeFilterBrewed_after(value));
+    }
+    if (name === "malt") {
+      return dispatch(changeFilterMalt(value));
+    }
+    if (name === "food") {
+      return dispatch(changeFilterFood(value));
+    } else {
+      return console.warn(
+        "wrong filter name in handleFilters function (possibly input name)"
+      );
+    }
+
+    //@TODO - replace the ifs above with not perfect code below
     const filtersDispatches = {
-      per_page: dispatch(changeFilterPer_page(value)),
-      abv_gt: dispatch(changeFilterAbv_gt(value)),
-      abv_lt: dispatch(changeFilterAbv_lt(value)),
+      per_page: dispatch(changeFilterPer_page(parseInt(value))),
+      abv_gt: dispatch(changeFilterAbv_gt(parseInt(value))),
+      abv_lt: dispatch(changeFilterAbv_lt(parseInt(value))),
       beer_name: dispatch(changeFilterBeer_name(value)),
       brewed_before: dispatch(changeFilterBrewed_before(value)),
       brewed_after: dispatch(changeFilterBrewed_after(value)),
@@ -108,7 +128,7 @@ const BeerSearch = () => {
           <select
             className="form-select form-floating"
             value={filters.per_page}
-            onChange={handleFilters}
+            onChange={() => handleFilters}
             name="per_page"
             id="per_page"
           >
