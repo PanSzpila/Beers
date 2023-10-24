@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
 import { store } from "./store";
+import { ItemDetails } from "../ShopComponent/ItemDetail";
 
 interface AllBeersState {
-  //@TODO more strict types
-  beersList: Array<object>;
+  beersList: Array<ItemDetails>;
   reqStatus: "idle";
 }
 
