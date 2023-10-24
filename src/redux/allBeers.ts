@@ -6,10 +6,10 @@ import { ItemDetails } from "../ShopComponent/ItemDetail";
 
 interface AllBeersState {
   beersList: Array<ItemDetails>;
-  reqStatus: "idle";
+  reqStatus: "idle" | "pending" | "rejected" | "fulfilled";
 }
 
-const initialState = {
+const initialState: AllBeersState = {
   beersList: [],
   reqStatus: "idle",
 };

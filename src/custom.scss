@@ -15,8 +15,11 @@ $blue: $beer;
 
 $mainBorderRadius: 0.7rem;
 
+$form-select-indicator-color: orange;
+
 body {
   background-color: $dark;
+  color-scheme: dark;
 }
 
 body a {
@@ -145,6 +148,28 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
   background-color: $beer;
 }
 
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-control-plaintext ~ label,
+.form-floating > .form-select ~ label {
+  color: $lightGrey;
+}
+
+.form-floating > .form-control:focus ~ label::after,
+.form-floating > .form-control:not(:placeholder-shown) ~ label::after,
+.form-floating > .form-control-plaintext ~ label::after,
+.form-floating > .form-select ~ label::after {
+  background-color: $dark;
+}
+
+.datepicker-month .datepicker-switch::before {
+  filter: invert(1);
+}
+
+.svg {
+  cursor: pointer;
+}
+
 .pagination .page-link,
 .page-item .disabled {
   color: $lightGrey;
@@ -222,7 +247,7 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
     box-shadow: inset 0px 0px 5px $beer !important;
   }
 
-  .thumb .max-value ,
+  .thumb .max-value,
   .thumb .min-value {
     background-color: $beer !important;
   }
