@@ -10,18 +10,27 @@ import { Modal, Button } from "react-bootstrap";
 import { hideModal } from "../redux/modal";
 
 function Shop() {
-  const { filters } = useAppSelector((state) => state);
-  const { modal } = useAppSelector((state) => state);
-
+  const errorMessageNoiItemsToDisplay: string =
+    "No items to display. Check your filters above.";
+  const { filters, modal } = useAppSelector((state) => state);
   const items = useAppSelector((state) => state.allBeers.beersList);
   const dispatch = useAppDispatch();
-
-  const maxPages = 13; //here You can set maximal number of pages in items list
+  const maxPages: number = 13; //here You can set maximal number of pages in items list
   const [showCards, setShowCards] = useState<boolean>(true); // options of display items: true - displays cards, false - displays table
 
-  useEffect(() => {
-    dispatch(getBeersData());
-  }, []);
+  /*   useEffect(() => {
+    const checkErrorMessage = () => {
+      console.log(
+        "filters.page:",
+        filters.page,
+        "items.length:",
+        items.length,
+        "items:",
+        items
+      );
+    };
+    checkErrorMessage();
+  }, [items]); */
 
   useEffect(() => {
     dispatch(getBeersData());
@@ -32,11 +41,9 @@ function Shop() {
       <BeerSearch />
       <div
         style={
-          items
-            ? filters.page === 1 && !items.length
-              ? { display: "none" }
-              : {}
-            : { display: "none" }
+          items && !items.length && filters.page === 1
+            ? { display: "none" }
+            : {}
         }
       >
         <div className="d-flex justify-content-between">
@@ -58,21 +65,16 @@ function Shop() {
           {/* Cards of Items */}
           <CardsOfItems />
         </div>
-        <Pagination // Pagination
-          maxPages={maxPages}
-        />
+        <Pagination maxPages={maxPages} />
       </div>
       <div
         style={
-          items
-            ? filters.page === 1 && !items.length
-              ? { display: "none" }
-              : {}
+          items && !items.length && filters.page === 1
+            ? {}
             : { display: "none" }
         }
       >
-        {/* message when error */}
-        <h3>No items to display. Check your filters above.</h3>
+        <h3>{errorMessageNoiItemsToDisplay}</h3>
       </div>
       {/* @TODO Modal dark theme, or maybe switch themes of all app */}
       <Modal
