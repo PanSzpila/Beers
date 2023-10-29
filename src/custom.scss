@@ -252,3 +252,9 @@ body .navbar-dark .navbar-nav .show > .nav-link:hover,
     background-color: $beer !important;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .item-detail-img {
+    max-width: 50%;
+  }
+}

@@ -127,7 +127,7 @@ function ItemDetail() {
           <img
             src={item && item.image_url}
             alt="beer image"
-            className="CenterImg"
+            className="CenterImg item-detail-img"
             height="50"
           />
         </div>
@@ -150,7 +150,7 @@ function ItemDetail() {
                   Malt:
                   <ul>
                     {item &&
-                      item.ingredients.malt.map((malt: Malt, index) => (
+                      item.ingredients.malt.map((malt: Malt, index: number) => (
                         <li
                           key={index}
                         >{`${malt.name} - ${malt.amount.value} ${malt.amount.unit}`}</li>
@@ -161,7 +161,7 @@ function ItemDetail() {
                   Hops:
                   <ul>
                     {item &&
-                      item.ingredients.hops.map((hop: Hop, index) => (
+                      item.ingredients.hops.map((hop: Hop, index: number) => (
                         <li
                           key={index}
                         >{`${hop.name} - ${hop.amount.value} ${hop.amount.unit}`}</li>
