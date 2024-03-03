@@ -2,9 +2,13 @@
 
 Fake site when user can search for interesting beers and view details.
 
-Based on:
+## working app address:
 
-- HTML, CSS, JavaScript.
+https://panszpila.github.io/shop
+
+## Based on:
+
+- HTML, CSS, TypesScript.
 - React with functional components with hooks
   - own components as well as component imported via npm
   - react router
@@ -15,6 +19,7 @@ Based on:
   - functions
 - REST API integration
   - filtering items, showing details
+- migration from JS to TS performed by TS-migrate and manual adjustments
 
 See description and "toDo's" on:
 https://panszpila.github.io/Beers/
