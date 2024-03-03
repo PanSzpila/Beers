@@ -8,7 +8,7 @@ https://panszpila.github.io/shop
 
 ## Based on:
 
-- HTML, CSS, TypesScript.
+- HTML, CSS, TypeScript.
 - React with functional components with hooks
   - own components as well as component imported via npm
   - react router
