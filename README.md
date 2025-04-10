@@ -1,6 +1,7 @@
 # Beers
 
 Fake site when user can search for interesting beers and view details.
+The shop module no longer works because the free API it relied on is no longer hosted.
 
 ## working app address:
 

@@ -11,26 +11,13 @@ import { hideModal } from "../redux/modal";
 
 function Shop() {
   const errorMessageNoiItemsToDisplay: string =
-    "No items to display. Check your filters above.";
+    "This application module no longer works because the free API it relied on is no longer hosted. No items to display.";
   const { filters, modal } = useAppSelector((state) => state);
   const items = useAppSelector((state) => state.allBeers.beersList);
   const dispatch = useAppDispatch();
   const maxPages: number = 13; //here You can set maximal number of pages in items list
   const [showCards, setShowCards] = useState<boolean>(true); // options of display items: true - displays cards, false - displays table
 
-  /*   useEffect(() => {
-    const checkErrorMessage = () => {
-      console.log(
-        "filters.page:",
-        filters.page,
-        "items.length:",
-        items.length,
-        "items:",
-        items
-      );
-    };
-    checkErrorMessage();
-  }, [items]); */
 
   useEffect(() => {
     dispatch(getBeersData());
@@ -93,41 +80,6 @@ function Shop() {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      {/*       <div
-        className="modal fade text-dark"
-        tabIndex={-1}
-        aria-labelledby="WrongSearchLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="WrongSearchLabel">
-                Wrong search filters parameters
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body" id="WrongSearchDescription">
-              {modal.description}
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 }
